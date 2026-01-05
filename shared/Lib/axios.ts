@@ -1,13 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://khalik-healthy.kerneltech.site/",
- headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-
+  baseURL: "https://khalik-healthy.kerneltech.site/api",
+  withCredentials: true,
+  headers: {
+    Accept: "application/json",
   },
-  timeout: 10000,
 });
 
 api.interceptors.request.use(
@@ -40,4 +38,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-    // "ngrok-skip-browser-warning": "true",

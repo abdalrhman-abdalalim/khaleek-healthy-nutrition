@@ -1,46 +1,42 @@
-export interface IUser {
-  id?: string;
+
+export interface UserProfile {
+  age: number;
+  gender: "male" | "female";
+  height: string;
+  weight: string;
+  target_weight: string;
+  activity_level: string;
+  goal: string;
+  diet_type: string;
+  budget_level: string;
+}
+
+export interface DailyTargets {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+export interface UserSettings {
+  voice_enabled: boolean;
+  ai_recommendations_enabled: boolean;
+  notification_frequency: "daily" | "weekly" | "monthly";
+}
+
+export interface User {
+  id: string;
   name: string;
   email: string;
-  password?: string;
-  age?: number;
-  gender?: 'male' | 'female' | string;
-  height?: number;
-  weight?: number;
-  target_weight?: number;
-  bmr?: number;
-  tdee?: number;
-  bmr_formula?: string;
-  activity_level?: string;
-  goal?: string;
-  diet_type?: string;
-  budget_level?: string;
-  daily_calorie_target?: number;
-  daily_protein_target?: number;
-  daily_carbs_target?: number;
-  daily_fat_target?: number;
-  voice_enabled?: boolean;
-  ai_recommendations_enabled?: boolean;
-  notification_frequency?: string;
-  email_verified_at?: string;
-  parsed_items?: any[];
-  api_response?: any[];
-  calorie_calculation_meta?: any[];
-  media_urls?: string[];
-  recommendations?: any[];
-  nutrition_analysis?: any[];
-  meal_suggestions?: any[];
-  training_suggestions?: any[];
-  improvement_areas?: any[];
-  ai_parameters?: any[];
-  prompt_used?: any[];
-  is_active?: boolean;
-  is_helpful?: boolean;
-  created_at?: string;
-  updated_at?: string;
-  deleted_at?: string | null;
+  profile: UserProfile;
+  daily_targets: DailyTargets;
+  settings: UserSettings;
+  created_at: string;
+  updated_at: string;
+}
 
-  foodLogs?: any[];
-  trainingLogs?: any[];
-  aiRecommendations?: any[];
+export interface AuthMeResponse {
+  success: boolean;
+  message: string;
+  data: User;
 }
