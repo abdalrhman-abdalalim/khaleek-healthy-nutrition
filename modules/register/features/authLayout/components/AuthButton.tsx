@@ -18,8 +18,8 @@ const AuthButton = ({
       type="submit"
       disabled={loading || disabled}
       className="
-        w-full h-12
-        bg-linear-to-r from-(--foreground) to-orange-400
+      w-full h-12
+      bg-linear-to-r bg-background
         hover:opacity-90
         text-white font-bold text-lg
         rounded-xl shadow-lg
