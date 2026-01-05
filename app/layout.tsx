@@ -2,6 +2,7 @@
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/shared/Lib/ReactQueryProvider";
+import PublicLayout from "@/shared/Features/PublicLayout/PublicLayout";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={`${cairo.variable} font-sans antialiased`}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <PublicLayout>{children}</PublicLayout>
+        </ReactQueryProvider>
       </body>
     </html>
   );

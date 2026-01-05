@@ -1,8 +1,6 @@
+import HomeScreen from "@/modules/Home/HomeScreen";
 
-export default function Home() {
-  return (
-   <>
-   
-   </>
-  );
-}
+const page = () => {
+  return <HomeScreen />;
+};
+export default page;
