@@ -1,37 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🥗 AI-Powered Nutrition & Fitness Assistant
 
-## Getting Started
+## 📋 Overview
 
-First, run the development server:
+An AI-driven web application that helps users track their nutrition and fitness activities and receive personalized recommendations based on their goals, body data, and lifestyle.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The platform enables users to log meals using voice or text input, automatically analyzes nutritional values via external APIs, tracks training activities, and generates weekly AI-powered recommendations to improve consistency and results.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project focuses on delivering a clean MVP, emphasizing usability, performance, and real-world system design rather than medical or advanced coaching features.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Features
 
-## Learn More
+### 🔐 Authentication & Onboarding
+- Secure email/password authentication
+- User onboarding with body metrics and fitness goals
+- Automatic calculation of BMR, TDEE, and daily calorie targets
 
-To learn more about Next.js, take a look at the following resources:
+### 🍽️ Nutrition Tracking
+- Voice-based food logging using Speech-to-Text
+- Text-based food input with quick-add support
+- Automatic calorie & macronutrient analysis
+- Daily nutrition summaries and progress tracking
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🏋️ Training Activity Logging
+- Workout logging (type, duration, calories burned)
+- MET-based calorie burn estimation
+- Weekly activity summaries
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🤖 AI Recommendations
+- Weekly AI-generated nutrition & fitness tips
+- Recommendations adapted to:
+  - User goals
+  - Diet preferences
+  - Budget constraints
+  - Adherence and progress
 
-## Deploy on Vercel
+### 📊 Dashboard & Reports
+- Personalized dashboard
+- Daily calorie & macro progress
+- Weekly adherence insights
+- Historical progress charts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# khaleek-healthy-nutrition
+## 🧱 Tech Stack
+
+### Frontend
+- **Next.js** (React)
+- **Tailwind CSS**
+- Responsive, mobile-first UI
+
+### Backend
+- **Laravel** (REST API)
+- JWT Authentication
+- Input validation & rate limiting
+
+### Database
+- **MySQL / PostgreSQL**
+
+### External Services
+- **CalorieNinjas API** – Nutrition analysis
+- **Speech-to-Text API** (Whisper or equivalent)
+- **AI Model API** (GPT or similar)
+
+---
+
+## 🧠 System Overview
+
+1. **User logs food** via voice or text
+2. **Food data is analyzed** using nutrition APIs
+3. **Daily & weekly metrics** are calculated
+4. **AI engine generates** personalized recommendations
+5. **User tracks progress** via dashboard
+
+---
+
+## 🎯 Project Scope
+
+### ✅ In Scope (MVP)
+- Nutrition & training tracking
+- AI-based weekly recommendations
+- User progress reporting
+
+### ❌ Out of Scope
+- Wearable integrations
+- Medical diagnoses
+- Meal delivery services
+- Mobile applications
+- Social features
+
+---
+
+## 🔒 Non-Functional Highlights
+- Optimized for mobile users
+- Secure API communication (HTTPS + JWT)
+- Graceful handling of external API failures
+- Scalable MVP architecture
+
+---
+
+## 📄 Documentation
+- **Software Requirements Specification (SRS)**
+- **Business Requirements Document (BRD)**
+- **Product Requirements Document (PRD)**
+- **API documentation** (OpenAPI / Swagger)
+
+---
+
+## 📌 Notes
+- This project focuses on system design and MVP implementation
+- Recommendations are informational only and not medical advice
+- Designed for extensibility in future versions
