@@ -20,7 +20,7 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <section className="relative  pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+    <section className="relative min-h-screen  pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
       <BackgroundElements />
       <div className="container relative px-6">
         <div className="max-w-5xl mx-auto text-center">
