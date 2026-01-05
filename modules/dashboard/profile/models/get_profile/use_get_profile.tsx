@@ -3,7 +3,7 @@ import { IUser } from "./type";
 import { fetchMe } from "../../lib/api_get_profile";
 
 
-export const useAuth = () => {
+export const useGetProfile = () => {
   return useQuery<IUser, Error>({
     queryKey: ["auth", "me"],
     queryFn: fetchMe,
