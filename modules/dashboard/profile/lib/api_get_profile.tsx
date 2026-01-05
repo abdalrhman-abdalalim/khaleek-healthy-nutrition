@@ -1,4 +1,5 @@
-import api from "@/lib/axios"; 
+
+import api from "@/shared/Lib/axios";
 import { IUser } from "../models/get_profile/type";
 
 
