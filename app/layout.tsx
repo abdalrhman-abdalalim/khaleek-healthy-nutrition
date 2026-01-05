@@ -1,7 +1,7 @@
 "use client";
 import { Cairo } from "next/font/google";
 import "./globals.css";
-import ReactQueryProvider from "@/Lib/ReactQueryProvider";
+import ReactQueryProvider from "@/shared/Lib/ReactQueryProvider";
 
 const cairo = Cairo({
   subsets: ["arabic"],
