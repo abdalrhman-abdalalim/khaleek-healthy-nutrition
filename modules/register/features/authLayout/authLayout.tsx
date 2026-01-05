@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { User } from "lucide-react";
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
@@ -14,7 +20,7 @@ interface Props {
 
 const AuthLayout = ({ title, description, children }: Props) => {
   return (
-    <div className="min-h-screen bg-(--background) flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12 relative overflow-hidden ">
       <Toaster position="top-center" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

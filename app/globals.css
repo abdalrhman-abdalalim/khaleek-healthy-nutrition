@@ -1,16 +1,13 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-:root{
-  --background: #E5E1DC;
-  --secondary: #EDEBE7;
-  --foreground: #FA865E;
+@theme {
+  --background: #0f2854;
+  --secondary: #edebe7;
+  --foreground: #fa865e;
   --textcolor: #020100;
-  --font-cairo: 'Cairo', sans-serif;
+  --font-cairo: "Cairo", sans-serif;
 }
 body {
-  background: var(--background);
-  color: var(--textcolor);
   font-family: var(--font-cairo);
   direction: rtl;
 }

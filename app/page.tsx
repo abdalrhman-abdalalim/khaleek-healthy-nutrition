@@ -1,8 +1,3 @@
-
 export default function Home() {
-  return (
-   <>
-   
-   </>
-  );
+  return <div className="bg-secondary min-h-screen">hello</div>;
 }

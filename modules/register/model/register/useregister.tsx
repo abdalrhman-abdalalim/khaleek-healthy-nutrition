@@ -1,15 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import api from "@/lib/axios";
 import Cookies from "js-cookie";
 import { RegisterRequest, RegisterResponse } from "./type";
+import api from "@/Lib/axios";
 
 export const registerApi = async (
   payload: RegisterRequest
 ): Promise<RegisterResponse> => {
-  const { data } = await api.post<RegisterResponse>(
-    "/auth/register",
-    payload
-  );
+  const { data } = await api.post<RegisterResponse>("/auth/register", payload);
   return data;
 };
 
@@ -33,10 +30,7 @@ export const useRegister = () => {
     },
 
     onError: (error: any) => {
-      console.error(
-        " Register error:",
-        error?.response?.data || error.message
-      );
+      console.error(" Register error:", error?.response?.data || error.message);
     },
   });
 };
