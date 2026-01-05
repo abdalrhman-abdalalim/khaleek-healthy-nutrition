@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-     --color-background: "#161E54",
-        --color-secondary: "#EDEBE7",
-        --color-foreground: "#FA865E",
-        --color-textcolor: "#020100",
+        --color-background: #174143;
+        --color-secondary: #427A76;
+        --color-foreground: #F9B487;
+        --color-textcolor: #EEEEEE;
 }
 body {
   font-family: var(--font-cairo);
