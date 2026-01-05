@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://4aff03edeb9d.ngrok-free.app/api",
+  baseURL: "http://localhost:8000/api",
  headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "ngrok-skip-browser-warning": "true",
+
   },
   timeout: 10000,
 });
@@ -40,3 +40,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+    // "ngrok-skip-browser-warning": "true",
