@@ -2,35 +2,46 @@
 
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, CheckCircle2 } from "lucide-react";
-import AuthInput from "../authLayout/AuthInput";
-import AuthButton from "../authLayout/AuthButton";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import AuthInput from "../authLayout/components/AuthInput";
+import AuthButton from "../authLayout/components/AuthButton";
+import { useRegister } from "../../model/register/useregister";
 
-interface RegisterFormProps {
-  registerData: {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
+const RegisterForm = () => {
+  const router = useRouter();
+  const registerMutation = useRegister();
+
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (registerData.password !== registerData.password_confirmation) {
+      toast.error("كلمات المرور غير متطابقة");
+      return;
+    }
+
+    registerMutation.mutate(registerData, {
+      onSuccess: (res) => {
+        toast.success(res.message || "تم التسجيل بنجاح");
+        router.push("/dashboard");
+      },
+      onError: (err: any) => {
+        toast.error(err?.response?.data?.message || "حدث خطأ في التسجيل");
+      },
+    });
   };
-  setRegisterData: React.Dispatch<React.SetStateAction<any>>;
-  showPassword: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  showConfirmPassword: boolean;
-  setShowConfirmPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit: (e: React.FormEvent) => void;
-  loading: boolean;
-}
 
-const RegisterForm = ({
-  registerData,
-  setRegisterData,
-  showPassword,
-  setShowPassword,
-  showConfirmPassword,
-  setShowConfirmPassword,
-  onSubmit,
-  loading,
-}: RegisterFormProps) => {
   return (
     <motion.div
       key="register"
@@ -38,10 +49,8 @@ const RegisterForm = ({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
     >
-      <form onSubmit={onSubmit} className="space-y-5">
+      <form onSubmit={handleRegister} className="space-y-5">
         <AuthInput
-          id="register-name"
-          placeholder="الاسم"
           label="الاسم الكامل"
           icon={<User />}
           value={registerData.name}
@@ -52,9 +61,7 @@ const RegisterForm = ({
         />
 
         <AuthInput
-          id="register-email"
           label="البريد الإلكتروني"
-          placeholder="example@email.com"
           type="email"
           icon={<Mail />}
           value={registerData.email}
@@ -65,9 +72,7 @@ const RegisterForm = ({
         />
 
         <AuthInput
-          id="register-password"
           label="كلمة المرور"
-          placeholder="••••••••"
           type={showPassword ? "text" : "password"}
           icon={<Lock />}
           value={registerData.password}
@@ -75,10 +80,7 @@ const RegisterForm = ({
             setRegisterData({ ...registerData, password: e.target.value })
           }
           rightAction={
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-            >
+            <button type="button" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <EyeOff /> : <Eye />}
             </button>
           }
@@ -86,9 +88,7 @@ const RegisterForm = ({
         />
 
         <AuthInput
-          id="confirm-password"
           label="تأكيد كلمة المرور"
-          placeholder="••••••••"
           type={showConfirmPassword ? "text" : "password"}
           icon={<CheckCircle2 />}
           value={registerData.password_confirmation}
@@ -111,7 +111,10 @@ const RegisterForm = ({
           required
         />
 
-        <AuthButton loading={loading} loadingText="جاري التسجيل...">
+        <AuthButton
+          loading={registerMutation.isPending}
+          loadingText="جاري التسجيل..."
+        >
           إنشاء حساب
         </AuthButton>
       </form>

@@ -1,0 +1,10 @@
+import { authModel } from "@/lib/auth";
+import { LoginResponse } from "./type";
+
+
+export const loginModel = {
+  handleLoginSuccess(response: LoginResponse) {
+    const token = response.data.access_token;
+    authModel.setToken(token);
+  },
+};
