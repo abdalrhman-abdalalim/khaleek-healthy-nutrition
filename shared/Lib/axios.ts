@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: "https://khalik-healthy.kerneltech.site/api",
@@ -6,23 +7,17 @@ const api = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
-  timeout: 10000,
 });
 
-api.interceptors.request.use(
-  (config) => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+api.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = Cookies.get("token"); 
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
   }
-);
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => response,
@@ -39,4 +34,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-    // "ngrok-skip-browser-warning": "true",

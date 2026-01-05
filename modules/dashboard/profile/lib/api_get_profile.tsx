@@ -1,9 +1,8 @@
-
 import api from "@/shared/Lib/axios";
-import { IUser } from "../models/get_profile/type";
+import { AuthMeResponse } from "../models/get_profile/type";
 
 
-export const fetchMe = async (): Promise<IUser> => {
-  const { data } = await api.get<IUser>("/auth/me");
+export const getMe = async (): Promise<AuthMeResponse> => {
+  const { data } = await api.get<AuthMeResponse>("/auth/me");
   return data;
 };
