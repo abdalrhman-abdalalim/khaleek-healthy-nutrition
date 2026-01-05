@@ -1,6 +1,5 @@
-import { authModel } from "@/lib/auth";
+import { authModel } from "@/shared/Lib/auth";
 import { LoginResponse } from "./type";
-
 
 export const loginModel = {
   handleLoginSuccess(response: LoginResponse) {

@@ -29,7 +29,13 @@ const LoginForm = () => {
         toast.success(res.message || "تم تسجيل الدخول بنجاح");
         router.push("/dashboard");
       },
-      onError: (err: any) => {
+      onError: (err: {
+        response: {
+          data: {
+            message: string;
+          };
+        };
+      }) => {
         toast.error(
           err?.response?.data?.message ||
             "خطأ في البريد الإلكتروني أو كلمة المرور"
@@ -66,7 +72,10 @@ const LoginForm = () => {
             setLoginData({ ...loginData, password: e.target.value })
           }
           rightAction={
-            <button type="button" onClick={() => setShowPassword(!showPassword)}>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
               {showPassword ? <EyeOff /> : <Eye />}
             </button>
           }
