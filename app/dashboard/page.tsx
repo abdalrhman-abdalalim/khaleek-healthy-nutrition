@@ -1,8 +1,7 @@
-const dashboard_page = () => {
-  return (
-    <>  
-    </>
-  )
-}
+import MainDashboardScreen from "@/modules/dashboard/MainDashboard/MainDashboardScreen";
 
-export default dashboard_page
+const dashboard_page = () => {
+  return <MainDashboardScreen />;
+};
+
+export default dashboard_page;
