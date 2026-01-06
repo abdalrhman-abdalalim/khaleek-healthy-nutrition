@@ -1,4 +1,4 @@
-import { User } from "../models/get_profile/type";
+import { User } from "../models/type";
 
 const Settings = ({ user }: { user: User }) => (
   <div className="bg-secondary/20 backdrop-blur-xl rounded-3xl p-6 border border-foreground/20 shadow-xl">
@@ -10,11 +10,7 @@ const Settings = ({ user }: { user: User }) => (
     <div className="flex items-center justify-between p-4 bg-background/40 rounded-xl border border-foreground/10">
       <span className="text-textcolor/70">الإشعارات</span>
       <span className="text-foreground font-bold">
-        {user.settings.notification_frequency === "daily"
-          ? "يومي"
-          : user.settings.notification_frequency === "weekly"
-          ? "أسبوعي"
-          : "شهري"}
+        {user.settings.notification_frequency}
       </span>
     </div>
   </div>
