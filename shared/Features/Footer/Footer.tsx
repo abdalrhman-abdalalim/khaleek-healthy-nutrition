@@ -6,7 +6,7 @@ import BottomSection from "./components/BottomSection";
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-foreground/10">
+    <footer className="bg-linear-to-br from-secondary/10 to-secondary/20  backdrop-blur-xl">
       <div className="container px-6 py-16">
         <div className="grid lg:grid-cols-2 gap-12 mb-12">
           <BrandSection />
