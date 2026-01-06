@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetProfile } from "./models/get_profile/use_get_profile";
+import { useGetProfile } from "./models/use_get_profile";
 import ProfileLoader from "./components/ProfileLoader";
 import ProfileError from "./components/ProfileError";
 import ProfileHeader from "./components/ProfileHeader";
@@ -31,8 +31,6 @@ const Profile_Screen = () => {
           <div className="space-y-6">
             <Lifestyle
               profile={user.profile}
-              activityLevelMap={{ sedentary: "قليل الحركة", light: "خفيف", moderate: "متوسط", active: "نشط", very_active: "نشط جداً" }}
-              budgetMap={{ low: "محدود", medium: "متوسط", high: "مرتفع" }}
             />
             <Settings user={user} />
           </div>
