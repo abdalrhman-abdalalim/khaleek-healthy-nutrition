@@ -11,7 +11,7 @@ const Lifestyle = ({ profile, activityLevelMap, budgetMap }: any) => (
 );
 
 const Item = ({ label, value }: any) => (
-  <div className="flex items-center justify-between p-4 bg-background/40 rounded-xl border border-foreground/10">
+  <div className="flex items-center justify-between p-4 bg-background/10 rounded-xl border border-foreground/10">
     <span className="text-textcolor/70">{label}</span>
     <span className="text-foreground font-bold">{value}</span>
   </div>
