@@ -10,7 +10,7 @@ const HeroBadge = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="text-xl font-bold text-background">خليك هيلثي</span>
+        <span className="text-xl font-bold text-textcolor">خليك هيلثي</span>
       </div>
     </Link>
   );

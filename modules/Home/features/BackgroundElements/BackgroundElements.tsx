@@ -1,23 +1,9 @@
 const BackgroundElements = () => {
-  const parallaxOffset = scrollY * 0.05;
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Animated gradient orbs */}
-      <div
-        className="absolute top-20 -left-20 w-96 h-96 rounded-full bg-linear-to-br from-background/20 to-foreground/20 blur-3xl animate-pulse"
-        style={{
-          transform: `translateY(${parallaxOffset}px)`,
-          animationDuration: "4s",
-        }}
-      />
-      <div
-        className="absolute bottom-20 -right-20 w-96 h-96 rounded-full bg-linear-to-br from-foreground/20 to-foreground/20 blur-3xl animate-pulse"
-        style={{
-          transform: `translateY(-${parallaxOffset}px)`,
-          animationDuration: "5s",
-          animationDelay: "1s",
-        }}
-      />
+      <div className="absolute top-20 -left-20 w-96 h-96 rounded-full bg-linear-to-br from-background/20 to-foreground/20 blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full bg-linear-to-br from-foreground/20 to-foreground/20 blur-3xl animate-pulse" />
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-linear-to-br from-foreground/10 to-background/10 blur-3xl animate-pulse"
         style={{ animationDuration: "6s", animationDelay: "2s" }}

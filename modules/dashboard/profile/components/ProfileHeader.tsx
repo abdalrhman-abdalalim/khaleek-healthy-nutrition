@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { User, UserProfile } from "../models/get_profile/type";
+import { User, UserProfile } from "../models/type";
 
 interface Props {
   user: User;
   profile: UserProfile;
-  goalMap: Record<string, string>;
 }
 
-const ProfileHeader = ({ user, profile, goalMap }: Props) => (
+const ProfileHeader = ({ user, profile}: Props) => (
   <div
     className="  bg-linear-to-br from-secondary/40 to-secondary/20  backdrop-blur-xl rounded-3xl p-6 sm:p-8 mb-6  border border-foreground/20 shadow-2xl
       flex flex-col gap-6
@@ -34,14 +33,15 @@ const ProfileHeader = ({ user, profile, goalMap }: Props) => (
 
         <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
           <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
-            {profile.gender === "male" ? "ذكر" : "أنثى"}
+            {profile.gender}
           </span>
           <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
             {profile.age} سنة
           </span>
           <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
-            {goalMap[profile.goal] || profile.goal}
+            {profile.goal}
           </span>
+        
         </div>
       </div>
     </div>

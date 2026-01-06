@@ -1,30 +1,105 @@
-import { User } from "../models/get_profile/type";
+import { User } from "../models/type";
+import { Volume2, VolumeX, Sparkles, Bell, BellOff, Sliders } from "lucide-react";
+import { ReactNode } from "react";
+
+type ToggleProps = {
+  label: string;
+  enabled: boolean;
+  icon: ReactNode;
+  color: string; 
+};
 
 const Settings = ({ user }: { user: User }) => (
-  <div className="bg-secondary/20 backdrop-blur-xl rounded-3xl p-6 border border-foreground/20 shadow-xl">
-    <h2 className="text-2xl font-bold text-textcolor mb-6">الإعدادات</h2>
+  <div className="relative bg-linear-to-br from-secondary/30 to-secondary/10 backdrop-blur-xl rounded-3xl p-8 border border-foreground/30 shadow-2xl overflow-hidden">
+    
+    <div className="relative z-10">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="p-3 bg-linear-to-br from-background to-background/50 rounded-2xl shadow-lg">
+          <Sliders className="w-7 h-7 text-white" />
+        </div>
+        <h2 className="text-3xl font-bold text-background ">
+          الإعدادات
+        </h2>
+      </div>
 
-    <Toggle label="الصوت" enabled={user.settings.voice_enabled} />
-    <Toggle label="توصيات AI" enabled={user.settings.ai_recommendations_enabled} />
+      <div className="space-y-4">
+        <Toggle 
+          label="الصوت" 
+          enabled={user.settings.voice_enabled}
+          icon={user.settings.voice_enabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+          color="from-green-500 to-emerald-500"
+        />
+        
+        <Toggle 
+          label="توصيات AI" 
+          enabled={user.settings.ai_recommendations_enabled}
+          icon={<Sparkles className="w-5 h-5" />}
+          color="from-purple-500 to-pink-500"
+        />
 
-    <div className="flex items-center justify-between p-4 bg-background/40 rounded-xl border border-foreground/10">
-      <span className="text-textcolor/70">الإشعارات</span>
-      <span className="text-foreground font-bold">
-        {user.settings.notification_frequency === "daily"
-          ? "يومي"
-          : user.settings.notification_frequency === "weekly"
-          ? "أسبوعي"
-          : "شهري"}
-      </span>
+        <div className="group flex items-center justify-between p-5 bg-linear-to-r from-background/60 to-background/40 rounded-2xl border border-foreground/20 hover:border-foreground/40 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-linear-to-br from-orange-500/20 to-yellow-500/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
+              <Bell className="w-5 h-5 text-orange-500" />
+            </div>
+            <span className="text-textcolor/80 font-medium text-lg">الإشعارات</span>
+          </div>
+          <div className="px-4 py-2 bg-linear-to-r from-orange-500/20 to-yellow-500/20 rounded-xl">
+            <span className="text-foreground font-bold text-lg">
+              {user.settings.notification_frequency}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
 
-const Toggle = ({ label, enabled }: any) => (
-  <div className="flex items-center justify-between p-4 bg-background/40 rounded-xl border border-foreground/10">
-    <span className="text-textcolor/70">{label}</span>
-    <div className={`w-12 h-6 rounded-full ${enabled ? "bg-green-500" : "bg-textcolor/20"} relative`}>
-      <div className={`absolute top-1 ${enabled ? "right-1" : "left-1"} w-4 h-4 bg-white rounded-full`} />
+const Toggle = ({ label, enabled, icon, color }: ToggleProps) => (
+  <div className="group flex items-center justify-between p-5 bg-linear-to-r from-background/60 to-background/40 rounded-2xl border border-foreground/20 hover:border-foreground/40 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+    
+    <div className="flex items-center gap-3">
+      <div
+        className={`p-2 bg-linear-to-br ${
+          enabled ? color : "from-gray-500/20 to-gray-600/20"
+        } rounded-xl group-hover:scale-110 transition-transform duration-300`}
+      >
+        <div className={enabled ? "text-white" : "text-gray-400"}>
+          {icon}
+        </div>
+      </div>
+
+      <span className="text-textcolor/80 font-medium text-lg">
+        {label}
+      </span>
+    </div>
+
+    <div className="relative">
+      <div
+        className={`w-16 h-8 rounded-full transition-all duration-500 shadow-lg ${
+          enabled
+            ? `bg-linear-to-r ${color} shadow-lg`
+            : "bg-linear-to-r from-gray-600/40 to-gray-700/40"
+        }`}
+      >
+        <div
+          className={`absolute top-1 ${
+            enabled ? "right-1" : "left-1"
+          } w-6 h-6 bg-white rounded-full shadow-xl transition-all duration-500 transform ${
+            enabled ? "scale-110" : "scale-100"
+          }`}
+        >
+          {enabled && (
+            <div className="absolute inset-0 rounded-full bg-linear-to-r from-green-400/50 to-emerald-400/50 animate-pulse" />
+          )}
+        </div>
+      </div>
+
+      {enabled && (
+        <div
+          className={`absolute inset-0 rounded-full bg-linear-to-r ${color} opacity-30 blur-xl animate-pulse`}
+        />
+      )}
     </div>
   </div>
 );

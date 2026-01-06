@@ -1,5 +1,5 @@
 import api from "@/shared/Lib/axios";
-import { AuthMeResponse } from "../models/get_profile/type";
+import { AuthMeResponse } from "../models/type";
 
 
 export const getMe = async (): Promise<AuthMeResponse> => {

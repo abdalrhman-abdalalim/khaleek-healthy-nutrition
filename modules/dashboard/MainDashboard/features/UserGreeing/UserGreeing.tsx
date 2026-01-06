@@ -13,7 +13,7 @@ export default function UserGreeting({
   greeting = "مرحباً",
 }: UserGreetingProps) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-xl bg-linear-to-r from-foreground to-foreground/90 shadow-sm my-3 mx-5">
+    <div className="flex items-center justify-between p-4 rounded-xl bg-linear-to-r from-foreground/40 to-foreground/90 shadow-sm my-3 mx-5">
       <div className="flex items-center gap-3">
         {/* Sparkle icon */}
         <div className="p-2 rounded-lg bg-background/20">

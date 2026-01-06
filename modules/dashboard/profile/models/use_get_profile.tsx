@@ -1,6 +1,6 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { getMe } from "../../lib/api_get_profile";
+import { getMe } from "../lib/api_get_profile";
 
 
 export const useGetProfile = () => {

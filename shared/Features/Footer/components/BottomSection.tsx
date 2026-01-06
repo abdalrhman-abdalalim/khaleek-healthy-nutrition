@@ -5,7 +5,7 @@ const BottomSection = () => {
         <p className="text-sm text-secondary/60">
           © 2024 NutriFit AI. جميع الحقوق محفوظة.
         </p>
-        <p className="text-xs text-background/60 mt-1">
+        <p className="text-xs text-secondary/60 mt-1">
           تصميم وتطوير بكل حب للصحة والعافية
         </p>
       </div>
