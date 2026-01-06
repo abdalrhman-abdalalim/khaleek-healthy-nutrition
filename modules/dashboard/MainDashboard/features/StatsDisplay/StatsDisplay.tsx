@@ -1,9 +1,4 @@
-// components/dashboard/StatsDisplay.tsx
 "use client";
-
-import { Card } from "@/components/ui/card";
-
-import GlowEffect from "./components/GlowEffect";
 import Cardcontent from "./components/FoodStat/Cardcontent";
 import CardHead from "./components/FoodStat/CardHeader";
 import TrainStatHeader from "./components/TrainStat/TrainStatHeader";
@@ -14,34 +9,28 @@ import OverallHeader from "./components/OverallStat/OverallHeader";
 import OverallContent from "./components/OverallStat/OverallContent";
 import MainCard from "./components/MainCard";
 import { ReactNode } from "react";
+import { useStatData } from "../../models/StatData";
+import LoadingScreen from "@/shared/components/LoadingScreen";
+import ErrorAlert from "@/shared/components/ErrorAlert";
+import EmptyState from "@/shared/components/EmptyState";
 
-interface StatsData {
-  food: {
-    total_logs: number;
-    total_calories: string;
-    avg_daily_calories: string;
-    last_log_date: string;
-  };
-  training: {
-    total_sessions: number;
-    total_minutes: number | null;
-    total_calories_burned: number | null;
-    last_session_date: string | null;
-  };
-  ai: {
-    total_recommendations: number;
-    avg_adherence_score: number | null;
-    helpful_count: number | null;
-  };
-  profile_completion: boolean;
-  days_active: number;
-}
+export default function StatsDisplay() {
+  const { data: stats, isLoading, isError } = useStatData();
+  if (isLoading) {
+    <LoadingScreen />;
+  }
+  if (isError) {
+    return <ErrorAlert />;
+  }
+  if (!stats) {
+    return (
+      <EmptyState
+        title="لا توجد إحصائيات"
+        message="ابدأ بتسجيل وجباتك وتمارينك."
+      />
+    );
+  }
 
-interface StatsDisplayProps {
-  stats: StatsData;
-}
-
-export default function StatsDisplay({ stats }: StatsDisplayProps) {
   const statData: ReactNode[] = [
     <>
       <CardHead total_logs={stats.food.total_logs} />
