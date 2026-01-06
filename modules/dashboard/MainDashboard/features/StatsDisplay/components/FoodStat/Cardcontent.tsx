@@ -3,8 +3,8 @@ import { Clock, Target } from "lucide-react";
 
 interface IProps {
   food: {
-    total_calories: string;
-    avg_daily_calories: string;
+    total_calories: number;
+    avg_daily_calories: number;
     last_log_date: string;
   };
 }
@@ -15,7 +15,7 @@ const Cardcontent = ({ food }: IProps) => {
         {/* Main calorie stat */}
         <div className="text-center mb-3">
           <div className="text-3xl font-bold text-secondary mb-1">
-            {parseFloat(food.total_calories).toFixed(0)}
+            {food.total_calories}
           </div>
           <div className="text-sm text-secondary/60">إجمالي السعرات</div>
         </div>
@@ -28,7 +28,7 @@ const Cardcontent = ({ food }: IProps) => {
               <span className="text-xs text-secondary/70">المتوسط اليومي</span>
             </div>
             <span className="font-medium text-secondary">
-              {parseFloat(food.avg_daily_calories).toFixed(0)} سعرة
+              {food.avg_daily_calories} سعرة
             </span>
           </div>
 

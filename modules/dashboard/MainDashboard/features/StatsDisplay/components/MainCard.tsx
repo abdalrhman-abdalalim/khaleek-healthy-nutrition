@@ -7,7 +7,7 @@ interface IProps {
 }
 const MainCard = ({ children }: IProps) => {
   return (
-    <Card className="group relative bg-linear-to-br from-secondary/40 to-secondary/10  backdrop-blur-xl hover:border-foreground/30 transition-all duration-300 hover:shadow-lg">
+    <Card className="group relative bg-linear-to-br from-secondary/40 to-secondary/10  backdrop-blur-xl border-foreground hover:border-foreground/30 transition-all duration-300 hover:shadow-lg">
       <GlowEffect />
       {children}
     </Card>
