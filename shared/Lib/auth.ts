@@ -19,3 +19,9 @@ export const authModel = {
     Cookies.remove(TOKEN_KEY);
   },
 };
+export const removeToken = () => {
+  Cookies.remove(TOKEN_KEY);
+};
+export const getToken = () => {
+  return Cookies.get("token");
+};
