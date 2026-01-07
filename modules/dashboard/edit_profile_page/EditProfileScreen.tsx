@@ -30,7 +30,7 @@ const EditProfileScreen = () => {
             <ActivityGoalsCard formData={formData} setFormData={setFormData} profileData={profileData}/>
             <DietBudgetCard formData={formData} setFormData={setFormData} profileData={profileData}/>
             <SettingsCard formData={formData} setFormData={setFormData} profileData={profileData}/>
-            <SaveChangesButton isPending={isPending}  onClick={handleSubmit}/>
+            <SaveChangesButton isPending={isPending}  onClick={async () => { await handleSubmit(); }}/>
         </div>
       </div>
     </div>
