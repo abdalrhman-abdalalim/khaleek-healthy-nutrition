@@ -1,6 +1,8 @@
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Activity, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface IProps {
   ai: {
@@ -9,24 +11,51 @@ interface IProps {
     helpful_count: number | null;
   };
 }
+
 const AiStatContent = ({ ai }: IProps) => {
   const aiEngagement =
     ai.total_recommendations > 0
       ? Math.min(ai.total_recommendations * 20, 100)
       : 0;
+
+  const hasNoAiData =
+    ai.total_recommendations === 0 ||
+    !ai.avg_adherence_score ||
+    !ai.helpful_count ||
+    aiEngagement === 0;
+
+  if (hasNoAiData) {
+    return (
+      <CardContent className="relative z-10">
+        <div className="text-center py-6 space-y-4">
+          <p className="text-sm font-semibold text-secondary">
+            الرجاء تسجيل وجباتك أولاً
+          </p>
+
+          <Button
+            asChild
+            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <Link href="/dashboard/profile/edit">
+              تسجيل وجباتك
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    );
+  }
+
   return (
     <CardContent className="relative z-10">
       <div className="space-y-4">
-        {/* Adherence score */}
         <div className="text-center mb-3">
           <div className="text-3xl font-bold text-secondary mb-1">
-            {ai.avg_adherence_score || 0}%
+            {ai.avg_adherence_score}%
           </div>
           <div className="text-sm text-secondary/60">معدل الإلتزام</div>
         </div>
 
         <div className="space-y-3">
-          {/* Helpful count */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-3 w-3 text-foreground/60" />
@@ -35,15 +64,16 @@ const AiStatContent = ({ ai }: IProps) => {
               </span>
             </div>
             <span className="font-medium text-secondary">
-              {ai.helpful_count || 0}
+              {ai.helpful_count}
             </span>
           </div>
 
-          {/* Engagement indicator */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity className="h-3 w-3 text-foreground/60" />
-              <span className="text-xs text-secondary/70">مستوى التفاعل</span>
+              <span className="text-xs text-secondary/70">
+                مستوى التفاعل
+              </span>
             </div>
             <span
               className={`text-xs font-medium ${
@@ -63,10 +93,11 @@ const AiStatContent = ({ ai }: IProps) => {
           </div>
         </div>
 
-        {/* Engagement progress */}
         <div className="pt-3 border-t border-foreground/10">
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-secondary/70">مشاركة الذكاء الاصطناعي</span>
+            <span className="text-secondary/70">
+              مشاركة الذكاء الاصطناعي
+            </span>
             <span className="text-foreground">{aiEngagement}%</span>
           </div>
           <Progress value={aiEngagement} className="h-1.5 bg-background/50" />
@@ -75,4 +106,5 @@ const AiStatContent = ({ ai }: IProps) => {
     </CardContent>
   );
 };
+
 export default AiStatContent;
