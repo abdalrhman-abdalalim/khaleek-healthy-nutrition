@@ -1,9 +1,9 @@
-import AddTrainingScreen from "@/modules/dashboard/add-training-log/AddTraningScreen";
+import TraningLog from "@/modules/dashboard/traning-log/Traning-log";
 
 const Traning =()=>{
     return(
         <>
-        <AddTrainingScreen/>
+          <TraningLog/>
         </>
     )
 }
