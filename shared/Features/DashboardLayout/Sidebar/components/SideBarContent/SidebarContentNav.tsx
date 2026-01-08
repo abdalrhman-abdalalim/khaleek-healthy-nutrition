@@ -25,8 +25,8 @@ const SidebarContentNav = ({ isExpanded }: IProps) => {
             key={item.label}
             variant="ghost"
             className={cn(
-              "w-full justify-start h-12 px-3 transition-all duration-300 relative group",
-              "hover:bg-primary/10 hover:text-primary",
+              "w-full justify-start h-12 px-3 transition-all duration-300 relative group cursor-pointer ",
+              "hover:bg-secondary/10 hover:text-primary",
               isActive && "bg-secondary/10 text-primary shadow-sm",
               isExpanded ? "gap-3 pr-4" : "justify-center"
             )}
