@@ -2,7 +2,7 @@ import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Target } from "lucide-react";
 
 interface IProps {
-  date: Date;
+  date: Date | undefined;
 }
 const TotalProgressHeader = ({ date }: IProps) => {
   return (
@@ -11,7 +11,7 @@ const TotalProgressHeader = ({ date }: IProps) => {
         <Target className="h-5 w-5 text-foreground" />
         تقدم اليوم
         <span className="text-sm font-normal text-secondary/60">
-          {new Date(date).toLocaleDateString("ar-SA")}
+          {date ? new Date(date).toLocaleDateString("ar-SA") : "غير محدد"}
         </span>
       </CardTitle>
     </CardHeader>

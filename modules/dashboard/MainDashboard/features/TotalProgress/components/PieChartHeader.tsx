@@ -8,11 +8,13 @@ import {
 } from "recharts";
 
 interface IProps {
-  consumedMacros: {
-    name: string;
-    value: number;
-    color: string;
-  }[];
+  consumedMacros:
+    | {
+        name: string;
+        value: number | undefined;
+        color: string;
+      }[]
+    | undefined;
 }
 const PieChartHeader = ({ consumedMacros }: IProps) => {
   return (
@@ -21,7 +23,7 @@ const PieChartHeader = ({ consumedMacros }: IProps) => {
         <PieChart>
           <Pie
             data={
-              consumedMacros.length > 0
+              consumedMacros?.length ?? 0 > 0
                 ? consumedMacros
                 : [
                     {
@@ -41,8 +43,8 @@ const PieChartHeader = ({ consumedMacros }: IProps) => {
               `${name}: ${(percent ?? 0 * 100).toFixed(0)}%`
             }
           >
-            {(consumedMacros.length > 0
-              ? consumedMacros
+            {(consumedMacros?.length ?? 0 > 0
+              ? consumedMacros!
               : [{ color: "#9ca3af" }]
             ).map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />

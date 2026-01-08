@@ -36,9 +36,7 @@ const AiStatContent = ({ ai }: IProps) => {
             asChild
             className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <Link href="/dashboard/profile/edit">
-              تسجيل وجباتك
-            </Link>
+            <Link href="/dashboard/profile/edit">تسجيل وجباتك</Link>
           </Button>
         </div>
       </CardContent>
@@ -71,9 +69,7 @@ const AiStatContent = ({ ai }: IProps) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity className="h-3 w-3 text-foreground/60" />
-              <span className="text-xs text-secondary/70">
-                مستوى التفاعل
-              </span>
+              <span className="text-xs text-secondary/70">مستوى التفاعل</span>
             </div>
             <span
               className={`text-xs font-medium ${
@@ -95,9 +91,7 @@ const AiStatContent = ({ ai }: IProps) => {
 
         <div className="pt-3 border-t border-foreground/10">
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-secondary/70">
-              مشاركة الذكاء الاصطناعي
-            </span>
+            <span className="text-secondary/70">مشاركة الذكاء الاصطناعي</span>
             <span className="text-foreground">{aiEngagement}%</span>
           </div>
           <Progress value={aiEngagement} className="h-1.5 bg-background/50" />

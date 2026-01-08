@@ -7,8 +7,8 @@ interface IProps {
     caloriesBurned: number;
     totalMinutes: number;
     sessionCount: number;
-  };
-  net_calories: number;
+  } | undefined;
+  net_calories: number | undefined;
 }
 
 const Training = ({ training, net_calories }: IProps) => {
@@ -30,9 +30,7 @@ const Training = ({ training, net_calories }: IProps) => {
             asChild
             className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <Link href="/dashboard/Traning/add_train">
-              إضافة التمارين
-            </Link>
+            <Link href="/dashboard/Traning/add_train">إضافة التمارين</Link>
           </Button>
         </div>
       </div>
@@ -44,9 +42,7 @@ const Training = ({ training, net_calories }: IProps) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Dumbbell className="h-4 w-4 text-purple-500" />
-          <span className="text-sm font-medium text-secondary">
-            التمارين
-          </span>
+          <span className="text-sm font-medium text-secondary">التمارين</span>
         </div>
 
         <div className="text-right">
@@ -71,7 +67,7 @@ const Training = ({ training, net_calories }: IProps) => {
           <span className="text-secondary/70">صافي السعرات</span>
           <span
             className={`font-medium ${
-              net_calories < 0 ? "text-green-500" : "text-secondary"
+              net_calories! < 0 ? "text-green-500" : "text-secondary"
             }`}
           >
             {net_calories} سعرة

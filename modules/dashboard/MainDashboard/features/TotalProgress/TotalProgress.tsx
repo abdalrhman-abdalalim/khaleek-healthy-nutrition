@@ -21,7 +21,7 @@ export default function TodayProgress() {
   if (isError) {
     return <ErrorAlert />;
   }
-  if (!data) {
+  if (isError) {
     return (
       <EmptyState
         title="لا توجد إحصائيات"
@@ -31,42 +31,42 @@ export default function TodayProgress() {
   }
 
   const consumedMacros = [
-    { name: "بروتين", value: data.food.protein, color: "#3b82f6" },
-    { name: "كاربوهيدرات", value: data.food.carbs, color: "#10b981" },
-    { name: "دهون", value: data.food.fat, color: "#f59e0b" },
-  ].filter((item) => item.value > 0);
+    { name: "بروتين", value: data?.food.protein, color: "#3b82f6" },
+    { name: "كاربوهيدرات", value: data?.food.carbs, color: "#10b981" },
+    { name: "دهون", value: data?.food.fat, color: "#f59e0b" },
+  ].filter((item) => item.value ?? 0 > 0);
 
-  const fatProgress = (data.food.fat / (data?.targets.fat ?? 0)) * 100;
+  const fatProgress = (data?.food.fat ?? 0 / (data?.targets.fat ?? 0)) * 100;
 
   return (
     <Card className="bg-background/50 border-foreground/20 mx-5 mb-6">
-      <TotalProgressHeader date={data.date} />
+      <TotalProgressHeader date={data?.date} />
       <CardContent>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             <PieChartHeader consumedMacros={consumedMacros} />
             <PieChartFooter
-              meal_count={data.food.mealCount}
-              session_count={data.training.sessionCount}
+              meal_count={data?.food.mealCount}
+              session_count={data?.training.sessionCount}
             />
           </div>
           <div className="space-y-6">
             <Calories
-              targetCal={data.targets.calories ?? 0}
-              calorieProgress={data.progress_percentage}
-              calorie_surplus_deficit={data.calorieSurplusDeficit}
-              calories={data.net_calories}
+              targetCal={data?.targets.calories ?? 0}
+              calorieProgress={data?.progress_percentage ?? 0}
+              calorie_surplus_deficit={data?.calorieSurplusDeficit ?? 0}
+              calories={data?.net_calories ?? 0}
             />
             <Macros
               fatProgress={fatProgress}
               food={data?.food}
-              targets={data.targets}
+              targets={data?.targets}
             />
             <Training
-              net_calories={data.net_calories}
+              net_calories={data?.net_calories}
               training={data?.training}
             />
-            <OverallProgress progress_percentage={data.progress_percentage} />
+            <OverallProgress progress_percentage={data?.progress_percentage} />
           </div>
         </div>
       </CardContent>

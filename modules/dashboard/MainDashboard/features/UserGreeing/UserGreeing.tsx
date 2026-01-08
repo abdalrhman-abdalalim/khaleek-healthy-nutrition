@@ -3,15 +3,11 @@
 
 import { Sparkles } from "lucide-react";
 
-interface UserGreetingProps {
-  userName?: string;
-  greeting?: string;
-}
-
-export default function UserGreeting({
-  userName = "أحمد",
-  greeting = "مرحباً",
-}: UserGreetingProps) {
+export default function UserGreeting() {
+  const userName =
+    typeof window !== "undefined"
+      ? localStorage.getItem("user_name")
+      : "المستخدم";
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-linear-to-r from-foreground/40 to-foreground/90 shadow-sm my-3 mx-5">
       <div className="flex items-center gap-3">
@@ -23,7 +19,7 @@ export default function UserGreeting({
         {/* Greeting text */}
         <div>
           <h1 className="text-xl font-bold text-background">
-            {greeting}، <span className="font-extrabold">{userName}</span>
+            <span className="font-extrabold">{userName}</span>
           </h1>
           <p className="text-sm text-background/80 mt-0.5">
             جاهز لتحقيق أهدافك اليوم؟

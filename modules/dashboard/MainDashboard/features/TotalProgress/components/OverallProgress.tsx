@@ -2,7 +2,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 interface IProps {
-  progress_percentage: number;
+  progress_percentage: number | undefined;
 }
 
 const OverallProgress = ({ progress_percentage }: IProps) => {
@@ -22,7 +22,7 @@ const OverallProgress = ({ progress_percentage }: IProps) => {
       <p className="text-xs text-secondary/60 text-center">
         {progress_percentage === 0
           ? "ابدأ بتسجيل وجباتك اليومية"
-          : progress_percentage < 50
+          : progress_percentage ?? 0 < 50
           ? "استمر، أنت على الطريق الصحيح"
           : "أداء ممتاز! استمر في التقدم"}
       </p>
@@ -31,11 +31,9 @@ const OverallProgress = ({ progress_percentage }: IProps) => {
         <Button
           asChild
           size="sm"
-         className="h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+          className="h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
         >
-          <Link href="/dashboard/profile/edit">
-            اكمال بياناتك
-          </Link>
+          <Link href="/dashboard/profile/edit">اكمال بياناتك</Link>
         </Button>
       </div>
     </div>
