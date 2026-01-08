@@ -2,6 +2,8 @@ import React from "react";
 import { DailyTargets } from "../models/type";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Flame, Beef, Wheat, Droplet, Apple } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface DailyTargetsCardProps {
   targets: DailyTargets;
@@ -9,6 +11,21 @@ interface DailyTargetsCardProps {
 
 const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
   const { calories, protein, carbs, fat } = targets;
+  const missingData =
+    !calories && !protein && !carbs && !fat;
+
+  if (missingData) {
+    return (
+      <div className="bg-secondary/20 backdrop-blur-xl rounded-3xl p-8 border border-foreground/20 shadow-xl text-center space-y-6">
+        <p className="text-lg font-semibold text-secondary">
+          الرجاء إكمال بياناتك أولاً
+        </p>
+        <Button asChild className="px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all">
+          <Link href="/dashboard/profile/edit">إكمال البيانات</Link>
+        </Button>
+      </div>
+    );
+  }
 
   const data = [
     {
@@ -47,7 +64,7 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
         الأهداف اليومية
       </h2>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
+      <div className="flex flex-col  items-center justify-center gap-12">
         <div className="relative w-80 h-80 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -78,7 +95,7 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
           </ResponsiveContainer>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <div className=" rounded-full px-6 py-2 ">
+            <div className="rounded-full px-6 py-2">
               <Apple className="w-8 h-8 text-foreground mb-2" />
             </div>
           </div>
@@ -87,7 +104,6 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
           {data.map((item, index) => {
             const Icon = item.icon;
-
             return (
               <div
                 key={index}
@@ -108,28 +124,16 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
                     className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform"
                     style={{ backgroundColor: `${item.color}4d` }}
                   >
-                    <Icon
-                      className="w-5 h-5"
-                      style={{ color: `${item.color}` }}
-                    />
+                    <Icon className="w-5 h-5" style={{ color: `${item.color}` }} />
                   </div>
-                  <span
-                    className="text-base font-medium"
-                    style={{ color: `${item.color}` }}
-                  >
+                  <span className="text-base font-medium" style={{ color: `${item.color}` }}>
                     {item.name}
                   </span>
                 </div>
-                <div
-                  className="text-4xl font-bold mb-1"
-                  style={{ color: `${item.color}` }}
-                >
+                <div className="text-4xl font-bold mb-1" style={{ color: `${item.color}` }}>
                   {item.value}
                 </div>
-                <div
-                  className="text-sm opacity-70"
-                  style={{ color: `${item.color}` }}
-                >
+                <div className="text-sm opacity-70" style={{ color: `${item.color}` }}>
                   {item.unit}
                 </div>
               </div>

@@ -31,18 +31,28 @@ const ProfileHeader = ({ user, profile}: Props) => (
           {user.email}
         </p>
 
-        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-          <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
-            {profile.gender}
-          </span>
-          <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
-            {profile.age} سنة
-          </span>
-          <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
-            {profile.goal}
-          </span>
-        
+       <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+          {(!profile.gender || !profile.age || !profile.goal) ? (
+            <Link href="/dashboard/profile/edit" className="px-4 py-2 bg-foreground/10 rounded-lg text-secondary text-sm font-semibold">
+              سجّل بياناتك أولاً
+            </Link>
+          ) : (
+            <>
+              <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
+                {profile.gender}
+              </span>
+
+              <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
+                {profile.age} سنة
+              </span>
+
+              <span className="px-4 py-1.5 bg-foreground/20 rounded-full text-foreground text-sm font-medium">
+                {profile.goal}
+              </span>
+            </>
+          )}
         </div>
+
       </div>
     </div>
 
