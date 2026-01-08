@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserProfile } from '../models/type';
 import { Ruler, Scale, Target } from 'lucide-react';
+import Link from 'next/link';
 
 interface BodyMeasurementsProps {
   profile: UserProfile;
@@ -30,7 +31,7 @@ const BodyMeasurements = ({ profile }: BodyMeasurementsProps) => {
     },
     {
       title: 'الوزن المستهدف',
-      value: profile.target_weight,
+      value: profile.target_weight ,
       unit: 'كجم',
       icon: Target,
       color: '#34D399',
@@ -49,9 +50,15 @@ const BodyMeasurements = ({ profile }: BodyMeasurementsProps) => {
         <h2 className="text-2xl font-bold text-textcolor">القياسات الجسدية</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {measurements.map((item, index) => {
           const Icon = item.icon;
+          const missing =
+            item.value === null ||
+            item.value === undefined ||
+            (typeof item.value === "number" && item.value === 0) ||
+            (typeof item.value === "string" && item.value.trim() === "");
+
           return (
             <div
               key={index}
@@ -71,31 +78,53 @@ const BodyMeasurements = ({ profile }: BodyMeasurementsProps) => {
                   <Icon className="w-5 h-5" style={{ color: item.color }} />
                 </div>
               </div>
-              
-              <div className="flex items-end gap-2">
-                <div className="text-4xl font-bold" style={{ color: item.color }}>
-                  {item.value}
-                </div>
-                <div className="text-base mb-1 opacity-70" style={{ color: item.color }}>
-                  {item.unit}
-                </div>
-              </div>
 
-              <div className="mt-4 h-1.5 bg-background/40 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1000 ease-out"
-                  style={{
-                    backgroundColor: item.color,
-                    width: '75%',
-                    animation: `slideIn 1.5s ease-out ${index * 0.2}s forwards`,
-                    transformOrigin: 'right',
-                  }}
-                />
-              </div>
+              {missing ? (
+                <div className="flex flex-col items-center justify-center text-center gap-3 py-6">
+                  <p className="text-sm font-semibold text-secondary">
+                    كمّل بياناتك أولاً
+                  </p>
+
+                  <Link
+                    href="/dashboard/profile/edit"
+                    className="px-4 py-2 rounded-xl bg-secondary text-background text-sm font-semibold shadow-md hover:scale-105 transition-all"
+                  >
+                    تعديل البيانات
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-end gap-2">
+                    <div className="text-4xl font-bold" style={{ color: item.color }}>
+                      {item.value}
+                    </div>
+                    <div
+                      className="text-base mb-1 opacity-70"
+                      style={{ color: item.color }}
+                    >
+                      {item.unit}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 h-1.5 bg-background/40 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-1000 ease-out"
+                      style={{
+                        backgroundColor: item.color,
+                        width: "75%",
+                        animation: `slideIn 1.5s ease-out ${index * 0.2}s forwards`,
+                        transformOrigin: "right",
+                      }}
+                    />
+                  </div>
+                </>
+              )}
             </div>
           );
         })}
-      </div>
+
+        </div>
+
 
       <style jsx>{`
         @keyframes slideIn {
