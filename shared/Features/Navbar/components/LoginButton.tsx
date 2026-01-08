@@ -1,30 +1,18 @@
-import { motion } from 'framer-motion';
-import { LogIn } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const LoginButton = () => {
   return (
-    <Link href="/Register">
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className={`
-          px-8 py-3 rounded-xl font-bold
-          flex items-center gap-2
-          bg-linear-to-r from-blue-500 to-cyan-500
-          text-white
-          shadow-lg hover:shadow-xl hover:shadow-blue-500/30
-          transition-all duration-300
-          group
-        `}
+    <div className="flex items-center gap-4">
+      <Button
+        className="bg-background text-secondary hover:bg-background/90"
+        asChild
       >
-        <motion.div whileHover={{ rotate: -15 }}>
-          <LogIn className="w-5 h-5" />
-        </motion.div>
-        <span>تسجيل الدخول</span>
-      </motion.button>
-    </Link>
+        <Link href="/Register" className="text-background">
+          ابدأ مجاناً
+        </Link>
+      </Button>
+    </div>
   );
 };
-
 export default LoginButton;

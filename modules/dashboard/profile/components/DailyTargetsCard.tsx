@@ -1,7 +1,7 @@
-import React from 'react';
-import { DailyTargets } from '../models/type';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { Flame, Beef, Wheat, Droplet, Apple } from 'lucide-react';
+import React from "react";
+import { DailyTargets } from "../models/type";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { Flame, Beef, Wheat, Droplet, Apple } from "lucide-react";
 
 interface DailyTargetsCardProps {
   targets: DailyTargets;
@@ -11,16 +11,42 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
   const { calories, protein, carbs, fat } = targets;
 
   const data = [
-    { name: 'السعرات', value: calories, color: '#FB923C', icon: Flame, unit: 'كالوري' },
-    { name: 'البروتين', value: protein, color: '#F87171', icon: Beef, unit: 'جرام' },
-    { name: 'الكربوهيدرات', value: carbs, color: '#60A5FA', icon: Wheat, unit: 'جرام' },
-    { name: 'الدهون', value: fat, color: '#FACC15', icon: Droplet, unit: 'جرام' },
+    {
+      name: "السعرات",
+      value: calories,
+      color: "#FB923C",
+      icon: Flame,
+      unit: "كالوري",
+    },
+    {
+      name: "البروتين",
+      value: protein,
+      color: "#F87171",
+      icon: Beef,
+      unit: "جرام",
+    },
+    {
+      name: "الكربوهيدرات",
+      value: carbs,
+      color: "#60A5FA",
+      icon: Wheat,
+      unit: "جرام",
+    },
+    {
+      name: "الدهون",
+      value: fat,
+      color: "#FACC15",
+      icon: Droplet,
+      unit: "جرام",
+    },
   ];
 
   return (
     <div className="bg-secondary/20 backdrop-blur-xl rounded-3xl p-8 border border-foreground/20 shadow-xl">
-      <h2 className="text-2xl font-bold text-textcolor mb-8 text-center">الأهداف اليومية</h2>
-      
+      <h2 className="text-2xl font-bold text-textcolor mb-8 text-center">
+        الأهداف اليومية
+      </h2>
+
       <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
         <div className="relative w-80 h-80 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
@@ -38,12 +64,12 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
                 animationEasing="ease-out"
               >
                 {data.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
+                  <Cell
+                    key={`cell-${index}`}
                     fill={entry.color}
                     style={{
                       filter: `drop-shadow(0 0 12px ${entry.color}80)`,
-                      transition: 'all 0.3s ease'
+                      transition: "all 0.3s ease",
                     }}
                   />
                 ))}
@@ -61,10 +87,9 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
           {data.map((item, index) => {
             const Icon = item.icon;
-            const colorClass = item.color.replace('#', '');
-            
+
             return (
-              <div 
+              <div
                 key={index}
                 className="rounded-2xl p-5 border transition-all cursor-pointer group hover:scale-105 transform"
                 style={{
@@ -79,20 +104,32 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
                 }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div 
+                  <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform"
                     style={{ backgroundColor: `${item.color}4d` }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: `${item.color}` }} />
+                    <Icon
+                      className="w-5 h-5"
+                      style={{ color: `${item.color}` }}
+                    />
                   </div>
-                  <span className="text-base font-medium" style={{ color: `${item.color}` }}>
+                  <span
+                    className="text-base font-medium"
+                    style={{ color: `${item.color}` }}
+                  >
                     {item.name}
                   </span>
                 </div>
-                <div className="text-4xl font-bold mb-1" style={{ color: `${item.color}` }}>
+                <div
+                  className="text-4xl font-bold mb-1"
+                  style={{ color: `${item.color}` }}
+                >
                   {item.value}
                 </div>
-                <div className="text-sm opacity-70" style={{ color: `${item.color}` }}>
+                <div
+                  className="text-sm opacity-70"
+                  style={{ color: `${item.color}` }}
+                >
                   {item.unit}
                 </div>
               </div>
