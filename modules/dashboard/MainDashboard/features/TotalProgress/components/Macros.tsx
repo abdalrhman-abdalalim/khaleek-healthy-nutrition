@@ -1,8 +1,25 @@
 import { Progress } from "@/components/ui/progress";
-import { Beef } from "lucide-react";
+import { Beef, Droplet, Wheat } from "lucide-react";
 
-interface IProps {}
-const Macros = ({}: IProps) => {
+interface IProps {
+  targets: {
+    calories: number | null;
+    protein: number | null;
+    carbs: number | null;
+    fat: number | null;
+  };
+  food: {
+    calories: number | null;
+    protein: number | null;
+    carbs: number | null;
+    fat: number | null;
+    mealCount: number | null;
+  };
+  fatProgress: number;
+}
+const Macros = ({ food, targets, fatProgress }: IProps) => {
+  const carbsProgress = (food?.carbs ?? 0 / (targets?.carbs ?? 0)) * 100;
+  const proteinProgress = (food?.protein ?? 0 / (targets?.protein ?? 0)) * 100;
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="space-y-2">
@@ -12,10 +29,10 @@ const Macros = ({}: IProps) => {
         </div>
         <div>
           <div className="font-bold text-secondary text-lg">
-            {data.food.protein}g
+            {food.protein}g
           </div>
           <div className="text-xs text-secondary/70">
-            هدف: {data.targets.protein}g
+            هدف: {targets.protein}g
           </div>
         </div>
         <Progress value={Math.min(proteinProgress, 100)} className="h-1.5" />
@@ -27,12 +44,8 @@ const Macros = ({}: IProps) => {
           <span className="text-xs text-secondary/70">كارب</span>
         </div>
         <div>
-          <div className="font-bold text-secondary text-lg">
-            {data.food.carbs}g
-          </div>
-          <div className="text-xs text-secondary/70">
-            هدف: {data.targets.carbs}g
-          </div>
+          <div className="font-bold text-secondary text-lg">{food.carbs}g</div>
+          <div className="text-xs text-secondary/70">هدف: {targets.carbs}g</div>
         </div>
         <Progress value={Math.min(carbsProgress, 100)} className="h-1.5" />
       </div>
@@ -43,12 +56,8 @@ const Macros = ({}: IProps) => {
           <span className="text-xs text-secondary/70">دهون</span>
         </div>
         <div>
-          <div className="font-bold text-secondary text-lg">
-            {data.food.fat}g
-          </div>
-          <div className="text-xs text-secondary/70">
-            هدف: {data.targets.fat}g
-          </div>
+          <div className="font-bold text-secondary text-lg">{food.fat}g</div>
+          <div className="text-xs text-secondary/70">هدف: {targets.fat}g</div>
         </div>
         <Progress value={Math.min(fatProgress, 100)} className="h-1.5" />
       </div>

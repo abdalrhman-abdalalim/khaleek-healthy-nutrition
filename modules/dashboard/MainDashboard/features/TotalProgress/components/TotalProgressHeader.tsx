@@ -2,7 +2,7 @@ import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Target } from "lucide-react";
 
 interface IProps {
-  date: string;
+  date: Date;
 }
 const TotalProgressHeader = ({ date }: IProps) => {
   return (
