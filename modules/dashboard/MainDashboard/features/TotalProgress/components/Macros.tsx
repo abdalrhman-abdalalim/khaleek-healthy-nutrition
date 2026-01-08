@@ -4,23 +4,26 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface IProps {
-  targets: {
+  targets?: {
+    // ✅ Make targets optional
     calories: number | null;
     protein: number | null;
     carbs: number | null;
     fat: number | null;
   };
-  food: {
-    calories: number | null;
-    protein: number | null;
-    carbs: number | null;
-    fat: number | null;
-    mealCount: number | null;
-  };
-  fatProgress: number;
+  food?:
+    | {
+        calories: number | null;
+        protein: number | null;
+        carbs: number | null;
+        fat: number | null;
+        mealCount: number | null;
+      }
+    | undefined;
+  fatProgress?: number; // ✅ Make fatProgress optional too
 }
 
-const Macros = ({ food, targets, fatProgress }: IProps) => {
+const Macros = ({ food, targets }: IProps) => {
   const hasNoData =
     !targets ||
     !food ||
@@ -41,18 +44,15 @@ const Macros = ({ food, targets, fatProgress }: IProps) => {
           asChild
           className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
         >
-          <Link href="/dashboard/profile/edit">
-            إعداد الأهداف الغذائية
-          </Link>
+          <Link href="/dashboard/profile/edit">إعداد الأهداف الغذائية</Link>
         </Button>
       </div>
     );
   }
 
-  const carbsProgress =
-    ((food.carbs ?? 0) / (targets.carbs ?? 1)) * 100;
-  const proteinProgress =
-    ((food.protein ?? 0) / (targets.protein ?? 1)) * 100;
+  const carbsProgress = ((food.carbs ?? 0) / (targets.carbs ?? 1)) * 100;
+  const proteinProgress = ((food.protein ?? 0) / (targets.protein ?? 1)) * 100;
+  const fatProgressValue = ((food.fat ?? 0) / (targets.fat ?? 1)) * 100;
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -78,12 +78,8 @@ const Macros = ({ food, targets, fatProgress }: IProps) => {
           <span className="text-xs text-secondary/70">كارب</span>
         </div>
         <div>
-          <div className="font-bold text-secondary text-lg">
-            {food.carbs}g
-          </div>
-          <div className="text-xs text-secondary/70">
-            هدف: {targets.carbs}g
-          </div>
+          <div className="font-bold text-secondary text-lg">{food.carbs}g</div>
+          <div className="text-xs text-secondary/70">هدف: {targets.carbs}g</div>
         </div>
         <Progress value={Math.min(carbsProgress, 100)} className="h-1.5" />
       </div>
@@ -94,14 +90,10 @@ const Macros = ({ food, targets, fatProgress }: IProps) => {
           <span className="text-xs text-secondary/70">دهون</span>
         </div>
         <div>
-          <div className="font-bold text-secondary text-lg">
-            {food.fat}g
-          </div>
-          <div className="text-xs text-secondary/70">
-            هدف: {targets.fat}g
-          </div>
+          <div className="font-bold text-secondary text-lg">{food.fat}g</div>
+          <div className="text-xs text-secondary/70">هدف: {targets.fat}g</div>
         </div>
-        <Progress value={Math.min(fatProgress, 100)} className="h-1.5" />
+        <Progress value={Math.min(fatProgressValue, 100)} className="h-1.5" />
       </div>
     </div>
   );
