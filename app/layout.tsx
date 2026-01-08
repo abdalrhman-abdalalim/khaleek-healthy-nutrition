@@ -3,6 +3,7 @@ import { Cairo } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/shared/Lib/ReactQueryProvider";
 import PublicLayout from "@/shared/Features/PublicLayout/PublicLayout";
+import { Toaster } from "react-hot-toast";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className={`${cairo.variable} font-sans antialiased`}>
         <ReactQueryProvider>
+          <Toaster position="top-center" />
           <PublicLayout>{children}</PublicLayout>
         </ReactQueryProvider>
       </body>
