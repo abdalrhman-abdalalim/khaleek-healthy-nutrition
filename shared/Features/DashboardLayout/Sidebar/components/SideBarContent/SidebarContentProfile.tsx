@@ -1,0 +1,64 @@
+import { Button } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
+import { LogOut, User } from "lucide-react";
+import { handleLogout } from "../../helper";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+interface IProps {
+  isExpanded: boolean;
+}
+const SidebarContentProfile = ({ isExpanded }: IProps) => {
+  const router = useRouter();
+  const pathname =
+    typeof window !== "undefined" ? window.location.pathname : "";
+  const isItemActive = (href: string) => {
+    if (href === "/dashboard/profile") {
+      return pathname === "/dashboard/profile";
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+  return (
+    <div className="p-4 ">
+      <div
+        className={cn(
+          "flex items-center gap-3 mb-4 p-2 rounded-lg hover:bg-accent transition-all duration-200 group hover:bg-foreground/10",
+          !isExpanded && "justify-center"
+        )}
+      >
+        <Link href={"/dashboard/profile"} className="relative">
+          <div
+            className={`w-10 h-10 rounded-full bg-linear-to-br from-foreground/80 to-foreground/10 border-primary/30 flex items-center justify-center border-0 ${
+              isItemActive("/dashboard/profile")
+                ? "border-2 border-foreground shadow-sm"
+                : "border"
+            }`}
+          >
+            <User size={18} className="text-secondary" />
+          </div>
+          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
+        </Link>
+        {isExpanded && (
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-foreground font-bold truncate">
+              John Doe
+            </p>
+          </div>
+        )}
+      </div>
+
+      <Button
+        variant="ghost"
+        className={cn(
+          "w-full justify-start h-12 px-3 text-red-500 hover:bg-red-500/10 hover:text-red-600 transition-all duration-200",
+          isExpanded ? "gap-3" : "justify-center"
+        )}
+        onClick={handleLogout}
+      >
+        <LogOut size={20} />
+        {isExpanded && <span className="whitespace-nowrap">Logout</span>}
+      </Button>
+    </div>
+  );
+};
+export default SidebarContentProfile;
