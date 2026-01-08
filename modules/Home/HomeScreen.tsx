@@ -1,14 +1,13 @@
-// components/sections/HomeScreentsx
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Sparkles, Target, Users, Zap } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import BackgroundElements from "./features/BackgroundElements/BackgroundElements";
-import BadgeSection from "./features/BadgeSection/BadgeSection";
-import MainTitles from "./features/MainTitles/MainTitles";
-import Stats from "./features/Stats/Stats";
+import FeaturesSection from "./features/FeaturesSection/FeaturesSection";
+import VoiceFeatureSection from "./features/VoiceFeatureSection/VoiceFeatureSection";
+import BudgetAwareSection from "./features/BudgetAwareSection/BudgetAwareSection";
+import StatsSuccessSection from "./features/StatsSuccessSection/StatsSuccessSection";
+import HowItWorksSection from "./features/HowItWorksSection/HowItWorksSection";
+import DietTypesSection from "./features/DietTypesSection/DietTypesSection";
 
 export default function HomeScreen() {
   const [scrollY, setScrollY] = useState(0);
@@ -20,15 +19,14 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <section className="relative min-h-screen  pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+    <section className="relative min-h-screen  md:pt-24 overflow-hidden">
       <BackgroundElements />
-      <div className="container relative px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <BadgeSection />
-          <MainTitles />
-          <Stats />
-        </div>
-      </div>
+          <FeaturesSection/>
+          <HowItWorksSection/>
+          <VoiceFeatureSection/>
+          <DietTypesSection/>
+          <BudgetAwareSection/>
+          <StatsSuccessSection/>
     </section>
   );
 }

@@ -29,7 +29,7 @@ export default function TrainingLogsSection({
   setSelectedDate,
   activityColors,
 }: TrainingLogsSectionProps) {
-    
+
     const sortedLogs = [...(filteredLogs || [])].sort(
     (a, b) => new Date(a.performed_at).getTime() - new Date(b.performed_at).getTime()
     );
@@ -53,7 +53,7 @@ export default function TrainingLogsSection({
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {sortedLogs?.map((log) => (
+        {filteredLogs?.map((log) => (
           <TrainingLogCard key={log.id} log={log} activityColors={activityColors} />
         ))}
       </div>
