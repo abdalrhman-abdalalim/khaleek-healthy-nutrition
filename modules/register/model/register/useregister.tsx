@@ -17,7 +17,6 @@ export const useRegister = () => {
         };
       };
     }) => {
-      console.error("Register error:", error?.response?.data);
     },
   });
 };

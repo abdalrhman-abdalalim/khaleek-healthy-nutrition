@@ -1,6 +1,8 @@
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Activity, Clock } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface IProps {
   training: {
@@ -10,15 +12,43 @@ interface IProps {
     last_session_date: string | null;
   };
 }
+
 const TrainStatContent = ({ training }: IProps) => {
   const trainingCompletion =
     training.total_sessions > 0
       ? Math.min(training.total_sessions * 10, 100)
       : 0;
+
+  const hasNoTrainingData =
+    training.total_sessions === 0 ||
+    !training.total_calories_burned ||
+    !training.total_minutes ||
+    trainingCompletion === 0;
+
+  if (hasNoTrainingData) {
+    return (
+      <CardContent className="relative z-10">
+        <div className="text-center py-6 space-y-4">
+          <p className="text-sm font-semibold text-secondary">
+            الرجاء تسجيل وجباتك أولاً
+          </p>
+
+          <Button
+            asChild
+            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <Link href="/dashboard/profile/edit">
+              تسجيل وجباتك
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    );
+  }
+
   return (
     <CardContent className="relative z-10">
       <div className="space-y-4">
-        {/* Main sessions stat */}
         <div className="text-center mb-3">
           <div className="text-3xl font-bold text-secondary mb-1">
             {training.total_sessions}
@@ -27,7 +57,6 @@ const TrainStatContent = ({ training }: IProps) => {
         </div>
 
         <div className="space-y-3">
-          {/* Calories burned */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity className="h-3 w-3 text-foreground/60" />
@@ -36,37 +65,36 @@ const TrainStatContent = ({ training }: IProps) => {
               </span>
             </div>
             <span className="font-medium text-secondary">
-              {training.total_calories_burned || 0} سعرة
+              {training.total_calories_burned} سعرة
             </span>
           </div>
 
-          {/* Total minutes */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Clock className="h-3 w-3 text-foreground/60" />
-              <span className="text-xs text-secondary/70">دقائق التمرين</span>
+              <span className="text-xs text-secondary/70">
+                دقائق التمرين
+              </span>
             </div>
             <span className="font-medium text-secondary">
-              {training.total_minutes || 0} دقيقة
+              {training.total_minutes} دقيقة
             </span>
           </div>
         </div>
 
-        {/* Progress bar for training consistency */}
-        {trainingCompletion > 0 && (
-          <div className="pt-3 border-t border-foreground/10">
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-secondary/70">التقدم الشهري</span>
-              <span className="text-foreground">{trainingCompletion}%</span>
-            </div>
-            <Progress
-              value={trainingCompletion}
-              className="h-1.5 bg-background/50"
-            />
+        <div className="pt-3 border-t border-foreground/10">
+          <div className="flex justify-between text-xs mb-1">
+            <span className="text-secondary/70">التقدم الشهري</span>
+            <span className="text-foreground">{trainingCompletion}%</span>
           </div>
-        )}
+          <Progress
+            value={trainingCompletion}
+            className="h-1.5 bg-background/50"
+          />
+        </div>
       </div>
     </CardContent>
   );
 };
+
 export default TrainStatContent;
