@@ -26,7 +26,7 @@ const LoginForm = () => {
 
     loginMutation.mutate(loginData, {
       onSuccess: (res) => {
-        toast.success(res.message || "تم تسجيل الدخول بنجاح");
+        toast.success("تم تسجيل الدخول بنجاح");
         router.push("/dashboard");
       },
       onError: (err: {
