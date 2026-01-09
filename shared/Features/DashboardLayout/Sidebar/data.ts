@@ -1,11 +1,4 @@
-import {
-  Apple,
-  BarChart3,
-  Dumbbell,
-  Home,
-  Settings,
-  Target,
-} from "lucide-react";
+import { Apple, BarChart3, Dumbbell, Home, Target } from "lucide-react";
 
 export const navItems = [
   {
@@ -17,13 +10,13 @@ export const navItems = [
   {
     icon: Apple,
     label: "التغذية",
-    href: "/nutrition",
+    href: "/dashboard/nutrition",
     description: "تتبع الوجبات والسعرات",
   },
   {
     icon: Dumbbell,
     label: "التدريب",
-    href: "/training",
+    href: "/dashboard/training",
     description: "تمارين وخطة التدريب",
   },
   {

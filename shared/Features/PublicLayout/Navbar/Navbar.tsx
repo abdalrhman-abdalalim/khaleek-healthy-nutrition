@@ -1,4 +1,3 @@
-"use client";
 import LoginButton from "./components/LoginButton";
 import HeroBadge from "./components/HeroBadge";
 
