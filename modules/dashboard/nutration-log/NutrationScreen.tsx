@@ -19,12 +19,10 @@ const NutrationScreen = () => {
     <div className="space-y-8 p-2">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-background to-foreground/90 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold  text-textcolor">
           التغذية اليومية
         </h1>
-        <p className="text-muted-foreground mt-2">
-          تتبع وادارة نظامك الغذائي بذكاء
-        </p>
+        <p className="text-foreground mt-2">تتبع وادارة نظامك الغذائي بذكاء</p>
       </div>
 
       <div className="bg-background/50 border-foregr ound/20 dark:from-background shadow-2xl  rounded-2xl p-6 md:p-8 border dark:border-gray-700">
@@ -60,8 +58,8 @@ const NutrationScreen = () => {
       {!isLoading && progressData && (
         <div
           className={`
-            bg-linear-to-br from-white via-gray-50 to-white 
-            dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 
+            bg-linear-to-br dark:from-foreground/10 dark:via-foreground/5 dark:to-foreground/10 
+
             rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 dark:border-gray-700
             transition-all duration-500 transform
             ${
