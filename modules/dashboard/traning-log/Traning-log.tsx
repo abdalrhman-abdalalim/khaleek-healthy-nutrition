@@ -53,7 +53,7 @@ export default function TrainingLog() {
           <EmptyTrainingState
             title="لا توجد تمارين مسجلة"
             description="ابدأ بتسجيل أول تمرين لك واستمتع بتتبع تقدمك"
-            actionHref="/dashboard/Traning/add_train"
+            actionHref="/dashboard/training/add_train"
             actionLabel="إضافة تمرين جديد"
           />
         )}

@@ -30,7 +30,7 @@ const Training = ({ training, net_calories }: IProps) => {
             asChild
             className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <Link href="/dashboard/Traning/add_train">إضافة التمارين</Link>
+            <Link href="/dashboard/training/add_train">إضافة التمارين</Link>
           </Button>
         </div>
       </div>

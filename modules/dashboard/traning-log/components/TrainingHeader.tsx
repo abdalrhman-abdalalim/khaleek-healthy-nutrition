@@ -8,7 +8,7 @@ export default function TrainingHeader() {
   const router = useRouter();
 
   const handleAddTraining = () => {
-    router.push("/dashboard/Traning/add_train");
+    router.push("/dashboard/training/add_train");
   };
 
   return (

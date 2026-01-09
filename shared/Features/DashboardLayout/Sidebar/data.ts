@@ -21,14 +21,9 @@ export const navItems = [
   },
   {
     icon: BarChart3,
-    label: "التقدم",
-    href: "/progress",
+    label: "توصياتك الأسبوعية",
+    href: "/dashboard/ai-recommendations",
     description: "تتبع تقدمك",
   },
-  {
-    icon: Target,
-    label: "الأهداف",
-    href: "/goals",
-    description: "أهدافك وطموحاتك",
-  },
+
 ];
