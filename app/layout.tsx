@@ -1,12 +1,8 @@
-"use client";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/shared/Lib/ReactQueryProvider";
-import PublicLayout from "@/shared/Features/PublicLayout/PublicLayout";
-import DashboardLayout from "@/shared/Features/DashboardLayout/DashboardLayout"; // ✅ Import directly
 import { Toaster } from "react-hot-toast";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import LayoutSwitcher from "@/shared/Lib/LayoutSwitcher";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -15,40 +11,13 @@ const cairo = Cairo({
   display: "swap",
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const pathname = usePathname();
-  const [isDashboard, setIsDashboard] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setIsDashboard(pathname?.startsWith("/dashboard") || false);
-  }, [pathname]);
-
-  // During initial render, show loading or consistent layout
-  if (!mounted) {
-    // Return a neutral layout that matches both possibilities
-    return (
-      <html lang="ar" dir="rtl">
-        <body className={`${cairo.variable} font-sans antialiased`}>
-          <div className="min-h-screen bg-background" />
-        </body>
-      </html>
-    );
-  }
-
-  const Layout = isDashboard ? DashboardLayout : PublicLayout;
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl">
       <body className={`${cairo.variable} font-sans antialiased`}>
         <ReactQueryProvider>
           <Toaster position="top-center" />
-          <Layout>{children}</Layout>
+          <LayoutSwitcher>{children}</LayoutSwitcher>
         </ReactQueryProvider>
       </body>
     </html>
