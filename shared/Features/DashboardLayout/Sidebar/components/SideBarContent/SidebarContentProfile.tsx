@@ -44,13 +44,16 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
             <User size={18} className="text-secondary" />
           </div>
           <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
-          {isExpanded && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm text-foreground font-bold truncate">
-                {userName}
-              </p>
-            </div>
-          )}
+          {/* Same logic, different syntax */}
+          <div
+            className={`flex-1 min-w-0 ${
+              isExpanded ? "block" : "md:hidden block"
+            }`}
+          >
+            <p className="text-sm text-foreground font-bold truncate">
+              {userName}
+            </p>
+          </div>
         </Link>
       </div>
       <Button
@@ -62,7 +65,13 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
         onClick={handleLogout}
       >
         <LogOut size={20} />
-        {isExpanded && <span className="whitespace-nowrap">Logout</span>}
+        <span
+          className={`whitespace-nowrap ${
+            isExpanded ? "block" : "max-md:block md:hidden"
+          }`}
+        >
+          Logout
+        </span>
       </Button>
     </div>
   );
