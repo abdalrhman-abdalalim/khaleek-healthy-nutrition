@@ -33,11 +33,13 @@ const SidebarContentNav = ({ isExpanded }: IProps) => {
             onClick={() => router.push(item.href)}
           >
             <item.icon className="text-foreground " size={20} />
-            {isExpanded && (
-              <span className="whitespace-nowrap text-textcolor">
-                {item.label}
-              </span>
-            )}
+            <span
+              className={`whitespace-nowrap text-textcolor ${
+                !isExpanded ? "md:hidden" : ""
+              }`}
+            >
+              {item.label}
+            </span>
           </Button>
         );
       })}
