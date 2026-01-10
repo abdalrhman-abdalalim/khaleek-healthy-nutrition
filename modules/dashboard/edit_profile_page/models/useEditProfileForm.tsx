@@ -6,10 +6,9 @@ import { useGetProfile } from "../../profile/models/use_get_profile";
 import toast from "react-hot-toast";
 import { VALID_ACTIVITY_LEVELS, VALID_BUDGET_LEVELS, VALID_DIET_TYPES, VALID_GOALS, VALID_NOTIFICATION_FREQUENCIES } from "../lib/constants/profileLabels";
 
-
 export const useEditProfileForm = () => {
   const { data: profileData, isLoading } = useGetProfile();
-  const isInitialized = useRef(false);
+  const previousProfileData = useRef<string | null>(null);
 
   const [formData, setFormData] = useState<UpdateProfilePayload>({
     age: 0,
@@ -30,16 +29,24 @@ export const useEditProfileForm = () => {
     mutationFn: (payload) => updateProfile(payload),
   });
 
-  useEffect(() => {
-    if (profileData?.data && !isInitialized.current) {
-      const user = profileData.data;
+useEffect(() => {
+  if (profileData?.data) {
+    const user = profileData.data;
+    const currentDataString = JSON.stringify(user.profile);
 
+    if (previousProfileData.current !== currentDataString) {
       const safeValue = <T extends string>(value: string, validList: T[], defaultValue: T): T =>
         validList.includes(value as T) ? (value as T) : defaultValue;
 
+      const mapGender = (gender: string): "male" | "female" => {
+        if (gender === "أنثى" || gender === "female") return "female";
+        if (gender === "ذكر" || gender === "male") return "male";
+        return "male"; 
+      };
+
       setFormData({
         age: user.profile.age,
-        gender: user.profile.gender === "male" || user.profile.gender === "female" ? user.profile.gender : "male",
+        gender: mapGender(user.profile.gender),
         height: parseFloat(user.profile.height),
         weight: parseFloat(user.profile.weight),
         target_weight: parseFloat(user.profile.target_weight),
@@ -52,9 +59,10 @@ export const useEditProfileForm = () => {
         notification_frequency: safeValue(user.settings.notification_frequency, VALID_NOTIFICATION_FREQUENCIES, "daily"),
       });
 
-      isInitialized.current = true;
+      previousProfileData.current = currentDataString;
     }
-  }, [profileData]);
+  }
+}, [profileData]);
 
   const handleSubmit = () => {
     updateProfileMutation.mutate(formData, {

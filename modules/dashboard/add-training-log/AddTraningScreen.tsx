@@ -27,7 +27,7 @@ export default function AddTrainingScreen() {
   ];
 
   return (
-    <div className="min-h-screen bg-background p-6 mb-14 mt-16">
+    <div className="min-h-screen bg-background p-6 pb-20">
       <div className="max-w-4xl mx-auto">
 
         <Toaster position="top-center" />
