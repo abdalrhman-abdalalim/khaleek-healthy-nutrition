@@ -37,7 +37,6 @@ const AiRecommendationScreen = () => {
 
           <WeeklySummary
             summary={recommendation.summary}
-            aiModel={recommendation.ai_model}
           />
 
        <div className="grid lg:grid-cols-3 gap-8 mb-8">

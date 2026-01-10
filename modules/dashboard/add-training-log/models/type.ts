@@ -9,15 +9,15 @@ export type ActivityType =
 export interface CreateTrainingLogPayload {
   activity_name: string;
   activity_type: ActivityType;
-  duration: number;            // minutes
-  intensity_level: number;     // 1 - 10
-  reps?: number;               // optional (strength)
-  sets?: number;               // optional (strength)
-  weight_used?: number;        // kg (strength)
-  distance?: number;           // ⚠️ only cardio
-  heart_rate_avg?: number;     // 40 - 220
+  duration: number;           
+  intensity_level: number;    
+  reps?: number;              
+  sets?: number;               
+  weight_used?: number;       
+  distance?: number;           
+  heart_rate_avg?: number;    
   notes?: string;
-  performed_at: string;        // "YYYY-MM-DD HH:mm:ss"
+  performed_at: string;       
 }
 
 export interface TrainingLog {

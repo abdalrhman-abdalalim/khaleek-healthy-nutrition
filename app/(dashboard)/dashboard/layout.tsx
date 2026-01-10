@@ -18,8 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className={cairo.variable}>
-      <body className="font-sans antialiased">
+    <html
+      lang="ar"
+      dir="rtl"
+      className={cairo.variable}
+      suppressHydrationWarning
+    >
+      <body
+        className="font-sans antialiased"
+        suppressHydrationWarning
+      >
         <ReactQueryProvider>
           <Toaster position="top-center" />
           <DashboardLayout>{children}</DashboardLayout>

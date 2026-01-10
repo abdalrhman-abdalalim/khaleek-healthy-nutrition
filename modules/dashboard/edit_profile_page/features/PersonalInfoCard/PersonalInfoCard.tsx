@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { User } from "lucide-react";
 import { UpdateProfilePayload } from "../../models/type";
 import TextField from "../../components/TextField";
 import SelectField from "../../components/SelectField";
 import CurrentValueBadge from "../../components/CurrentValueBadge";
-
 
 interface PersonalInfoCardProps {
   formData: UpdateProfilePayload;
@@ -15,6 +14,17 @@ interface PersonalInfoCardProps {
 }
 
 const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({ formData, setFormData, profileData }) => {
+  // تأكد إن gender موجود في formData من البداية
+  useEffect(() => {
+    if (profileData?.data.profile.gender && !formData.gender) {
+      setFormData(prev => ({
+        ...prev,
+        gender: profileData.data.profile.gender
+      }));
+    }
+  }, [profileData, formData.gender, setFormData]);
+console.log("formData.gender:", formData.gender);
+console.log("profileData gender:", profileData?.data.profile.gender);
   return (
     <div className="bg-secondary/20 backdrop-blur-xl rounded-3xl p-6 border border-foreground/20 shadow-xl">
       <div className="flex items-center gap-3 mb-6">
@@ -60,7 +70,7 @@ const PersonalInfoCard: React.FC<PersonalInfoCardProps> = ({ formData, setFormDa
         <div className="flex flex-col sm:flex-row sm:items-end sm:gap-4">
           <SelectField
             label="الجنس"
-            value={formData.gender}
+            value={formData.gender || profileData?.data.profile.gender}
             onChange={(value) =>
               setFormData({ ...formData, gender: value as "male" | "female" })
             }
