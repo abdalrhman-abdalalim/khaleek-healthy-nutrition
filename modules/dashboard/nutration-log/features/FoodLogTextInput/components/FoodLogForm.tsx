@@ -256,7 +256,7 @@ const FoodLogForm = ({
             w-full h-16 text-lg font-bold rounded-2xl
             relative overflow-hidden group
             transition-all duration-500
-            shadow-lg hover:shadow-2xl
+            shadow-lg hover:shadow-2xl 
             ${
               !text.trim() || isCreating || isSubmitting
                 ? "opacity-60 cursor-not-allowed"
@@ -287,7 +287,7 @@ const FoodLogForm = ({
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   className="w-6 h-6 border-2 border-textcolor/30 border-t-textcolor rounded-full"
                 />
-                <span className="text-textcolor font-semibold">
+                <span className="text-black font-semibold">
                   جاري المعالجة...
                 </span>
               </>
@@ -297,9 +297,9 @@ const FoodLogForm = ({
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <Sparkles className="w-5 h-5 text-textcolor" />
+                  <Sparkles className="w-5 h-5 text-black" />
                 </motion.div>
-                <span className="text-textcolor">تسجيل الوجبة</span>
+                <span className="text-black">تسجيل الوجبة</span>
               </>
             )}
           </div>
