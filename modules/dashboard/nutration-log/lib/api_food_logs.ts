@@ -27,7 +27,7 @@ export const parseFoodText = async (
   text: string
 ): Promise<ParsedFoodItem[]> => {
   try {
-    const response = await api.post("/food-logs/parse-text", { text });
+    const response = await api.post("/food-logs/text", { text });
     return response.data.data || [];
   } catch (error) {
     console.error("Error parsing food text:", error);

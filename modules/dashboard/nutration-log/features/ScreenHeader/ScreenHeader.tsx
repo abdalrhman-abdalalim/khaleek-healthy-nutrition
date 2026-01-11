@@ -6,22 +6,35 @@ const ScreenHeader = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         className="relative inline-block"
       >
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
+        <motion.h1 
+          className="text-3xl md:text-4xl font-bold bg-linear-to-r from-foreground via-secondary to-foreground bg-clip-text text-transparent"
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
           التغذية اليومية
-        </h1>
-        <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+        </motion.h1>
+        <motion.div 
+          className="absolute -bottom-2 left-0 right-0 h-1 bg-linear-to-r from-transparent via-foreground to-transparent opacity-70"
+          animate={{ scaleX: [0.8, 1, 0.8] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        ></motion.div>
       </motion.div>
+
       <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1 }}
-        className="text-foreground/70 mt-3 text-lg"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="text-textcolor/70 mt-3 text-lg font-medium"
       >
         تتبع وادارة نظامك الغذائي بذكاء
       </motion.p>
+
+    
     </div>
   );
 };
+
 export default ScreenHeader;

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// app/dashboard/components/FoodLogTextInput.tsx
 "use client";
 
 import { useState } from "react";
@@ -37,7 +35,6 @@ export default function FoodLogTextInput() {
     setIsSubmitting(true);
 
     try {
-      // First try to parse the text to show preview
       const parseResult = await parseFoodText(text);
 
       if (parseResult.success && parseResult.data?.length) {
@@ -46,14 +43,13 @@ export default function FoodLogTextInput() {
           {
             icon: "👨‍🍳",
             style: {
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              color: "white",
+              background: "linear-gradient(135deg, #F9B487 0%, #D9E9CF 100%)",
+              color: "#174143",
             },
           }
         );
       }
 
-      // Create the food log
       const result = await createFoodLog({ meal_type: mealType, text });
 
       if (result.success) {
@@ -61,18 +57,18 @@ export default function FoodLogTextInput() {
           duration: 3000,
           icon: "✅",
           style: {
-            background: "linear-gradient(135deg, #4CAF50 0%, #45a049 100%)",
-            color: "white",
+            background: "linear-gradient(135deg, #D9E9CF 0%, #F9B487 100%)",
+            color: "#174143",
           },
         });
-        setText(""); // Clear input
+        setText("");
       }
     } catch (error) {
       toast.error("حدث خطأ أثناء حفظ الطعام", {
         icon: "❌",
         style: {
-          background: "linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%)",
-          color: "white",
+          background: "linear-gradient(135deg, #F9B487 0%, #D9E9CF 100%)",
+          color: "#174143",
         },
       });
     } finally {
@@ -82,17 +78,16 @@ export default function FoodLogTextInput() {
 
   const getMealTypeColor = (type: string) => {
     const colors = {
-      breakfast: "from-amber-400 via-orange-400 to-yellow-400",
-      lunch: "from-emerald-400 via-teal-400 to-green-400",
-      dinner: "from-blue-400 via-indigo-400 to-purple-400",
-      snack: "from-purple-400 via-pink-400 to-rose-400",
+      breakfast: "from-foreground via-secondary to-foreground",
+      lunch: "from-secondary via-foreground to-secondary",
+      dinner: "from-foreground to-secondary",
+      snack: "from-secondary to-foreground",
     };
     return colors[type as keyof typeof colors];
   };
 
   return (
     <div className="space-y-8">
-      {/* Header with Gradient */}
       <HeaderWithGradiant />
 
       <FoodLogForm

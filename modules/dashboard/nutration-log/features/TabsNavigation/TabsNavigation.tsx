@@ -6,6 +6,7 @@ interface IProps {
   setActiveView: (view: ViewType) => void;
   activeView: ViewType;
 }
+
 const TabsNavigation = ({ activeView, setActiveView }: IProps) => {
   const tabs = [
     {
@@ -13,27 +14,27 @@ const TabsNavigation = ({ activeView, setActiveView }: IProps) => {
       label: "كل التسجيلات",
       description: "عرض جميع سجلات الطعام",
       icon: <List className="w-5 h-5" />,
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      borderColor: "border-blue-200 dark:border-blue-800",
+      color: "from-foreground to-secondary",
+      bgColor: "bg-foreground/10",
+      borderColor: "border-foreground/30",
     },
     {
       id: "daily",
       label: "اليوم",
       description: "تتبع تقدمك اليومي",
       icon: <Clock className="w-5 h-5" />,
-      color: "from-emerald-500 to-green-500",
-      bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
-      borderColor: "border-emerald-200 dark:border-emerald-800",
+      color: "from-secondary to-foreground",
+      bgColor: "bg-secondary/10",
+      borderColor: "border-secondary/30",
     },
     {
       id: "weekly",
       label: "أسبوعي",
       description: "نظرة عامة أسبوعية",
       icon: <Calendar className="w-5 h-5" />,
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
-      borderColor: "border-purple-200 dark:border-purple-800",
+      color: "from-foreground to-secondary",
+      bgColor: "bg-foreground/10",
+      borderColor: "border-foreground/30",
     },
   ];
 
@@ -41,89 +42,95 @@ const TabsNavigation = ({ activeView, setActiveView }: IProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-background/80 backdrop-blur-sm rounded-2xl p-1 border border-gray-100 dark:border-gray-800 shadow-lg"
+      transition={{ duration: 0.5 }}
+      className="bg-background/80 backdrop-blur-sm rounded-2xl p-1 border border-foreground/20 shadow-lg"
     >
       <div className="flex flex-col md:flex-row gap-2">
-        {tabs.map((tab) => (
-          <button
+        {tabs.map((tab, index) => (
+          <motion.button
             key={tab.id}
             onClick={() => setActiveView(tab.id as ViewType)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className={`
-                relative flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl
-                transition-all duration-300 group overflow-hidden
-                ${
-                  activeView === tab.id
-                    ? `${tab.bgColor} ${tab.borderColor} border shadow-lg`
-                    : "hover:bg-gray-50 dark:hover:bg-gray-800/50"
-                }
-              `}
+              relative flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl
+              transition-all duration-300 group overflow-hidden
+              ${
+                activeView === tab.id
+                  ? `${tab.bgColor} ${tab.borderColor} border-2 shadow-lg`
+                  : "hover:bg-secondary/5 border-2 border-transparent"
+              }
+            `}
           >
-            {/* Background glow for active tab */}
             {activeView === tab.id && (
-              <div
-                className={`absolute inset-0 bg-linear-to-br ${tab.color} opacity-10`}
+              <motion.div
+                layoutId="activeTabGlow"
+                className={`absolute inset-0  `}
+                transition={{ duration: 0.3 }}
               />
             )}
 
-            {/* Icon */}
-            <div
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
               className={`
-                  relative p-2 rounded-lg transition-all duration-300
-                  ${
-                    activeView === tab.id
-                      ? "text-white bg-linear-to-br"
-                      : "text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800"
-                  }
-                  ${activeView === tab.id ? tab.color : ""}
-                `}
+                relative p-2 rounded-lg transition-all duration-300
+                ${
+                  activeView === tab.id
+                    ? `text-textcolor bg-linear-to-br ${tab.color}`
+                    : "text-textcolor/60 bg-secondary/20"
+                }
+              `}
             >
               {tab.icon}
-            </div>
+            </motion.div>
 
-            {/* Text content */}
             <div className="flex-1 text-right">
               <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`
-                      font-bold text-lg transition-colors duration-300
-                      ${
-                        activeView === tab.id
-                          ? "text-gray-900 dark:text-white"
-                          : "text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-                      }
-                    `}
+                <motion.span
+                  animate={{
+                    color: activeView === tab.id ? "#F9B487" : "#EEEEEE",
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="font-bold text-lg"
                 >
                   {tab.label}
-                </span>
+                </motion.span>
                 {activeView === tab.id && (
                   <motion.div
                     layoutId="activeTabIndicator"
-                    className="w-2 h-2 rounded-full bg-linear-to-r from-primary to-primary/60"
+                    className="w-2 h-2 rounded-full bg-linear-to-r from-foreground to-secondary"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
                   />
                 )}
               </div>
-              <p
-                className={`
-                    text-sm mt-1 transition-colors duration-300
-                    ${
-                      activeView === tab.id
-                        ? "text-gray-600 dark:text-gray-300"
-                        : "text-gray-500 dark:text-gray-400"
-                    }
-                  `}
+              <motion.p
+                animate={{
+                  color: activeView === tab.id ? "#D9E9CF" : "#EEEEEE99",
+                }}
+                transition={{ duration: 0.3 }}
+                className="text-sm mt-1"
               >
                 {tab.description}
-              </p>
+              </motion.p>
             </div>
 
-            {/* Active indicator */}
             {activeView === tab.id && (
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-current to-transparent opacity-30"></div>
+              <motion.div
+                layoutId="activeTabLine"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-foreground to-transparent opacity-60"
+                transition={{ duration: 0.3 }}
+              />
             )}
-          </button>
+          </motion.button>
         ))}
       </div>
     </motion.div>
   );
 };
+
 export default TabsNavigation;
