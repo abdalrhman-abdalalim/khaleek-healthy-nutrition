@@ -14,6 +14,7 @@ import {
   Cell,
 } from "recharts";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface WeeklyChartProps {
   dailyData: Array<{
@@ -81,110 +82,138 @@ const WeeklyChart = ({ dailyData, dailyTarget }: WeeklyChartProps) => {
   });
 
   const getBarColor = (value: number, target: number) => {
-    if (value === 0) return "#D1D5DB";
+    if (value === 0) return "#D9E9CF";
     if (value < target * 0.8) return "#F9B487";
-    if (value < target) return "#60A5FA";
-    if (value < target * 1.2) return "#34D399";
-    return "#F87171";
+    if (value < target) return "#D9E9CF";
+    if (value < target * 1.2) return "#F9B487";
+    return "#F9B487";
   };
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
-          <p className="font-semibold text-gray-800 dark:text-white mb-2">
-            {label}
-          </p>
-          <div className="space-y-1">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-background border-2 border-foreground/40 p-4 rounded-xl shadow-xl"
+        >
+          <p className="font-bold text-textcolor mb-3">{label}</p>
+          <div className="space-y-2">
             <p className="text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                السعرات:{" "}
-              </span>
+              <span className="font-medium text-textcolor/70">السعرات: </span>
               <span className="font-bold text-foreground">
                 {data.calories.toFixed(0)}
               </span>
             </p>
             <p className="text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                البروتين:{" "}
-              </span>
-              <span className="font-bold text-blue-500">
+              <span className="font-medium text-textcolor/70">البروتين: </span>
+              <span className="font-bold text-secondary">
                 {data.protein.toFixed(0)}g
               </span>
             </p>
             <p className="text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-300">
+              <span className="font-medium text-textcolor/70">
                 الكربوهيدرات:{" "}
               </span>
-              <span className="font-bold text-green-500">
+              <span className="font-bold text-foreground">
                 {data.carbs.toFixed(0)}g
               </span>
             </p>
             <p className="text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                الدهون:{" "}
-              </span>
-              <span className="font-bold text-orange-500">
+              <span className="font-medium text-textcolor/70">الدهون: </span>
+              <span className="font-bold text-secondary">
                 {data.fat.toFixed(0)}g
               </span>
             </p>
             {data.meals > 0 && (
               <p className="text-sm">
-                <span className="font-medium text-gray-700 dark:text-gray-300">
+                <span className="font-medium text-textcolor/70">
                   عدد الوجبات:{" "}
                 </span>
-                <span className="font-bold text-purple-500">{data.meals}</span>
+                <span className="font-bold text-foreground">{data.meals}</span>
               </p>
             )}
           </div>
-        </div>
+        </motion.div>
       );
     }
     return null;
   };
 
+  const metrics = [
+    { key: "calories", label: "السعرات", icon: "🔥", color: "#F9B487" },
+    { key: "protein", label: "البروتين", icon: "💪", color: "#D9E9CF" },
+    { key: "carbs", label: "الكربوهيدرات", icon: "🌾", color: "#F9B487" },
+    { key: "fat", label: "الدهون", icon: "🫒", color: "#D9E9CF" },
+  ];
+
   return (
-    <div className="space-y-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-4"
+    >
       {/* Metric Selector */}
-      <div className="flex gap-2 overflow-x-auto pb-2">
-        {[
-          { key: "calories", label: "السعرات", icon: "🔥", color: "#F9B487" },
-          { key: "protein", label: "البروتين", icon: "💪", color: "#60A5FA" },
-          { key: "carbs", label: "الكربوهيدرات", icon: "🌾", color: "#34D399" },
-          { key: "fat", label: "الدهون", icon: "🫒", color: "#FBBF24" },
-        ].map((metric) => (
-          <button
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="flex gap-2 overflow-x-auto pb-2"
+      >
+        {metrics.map((metric, index) => (
+          <motion.button
             key={metric.key}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 + index * 0.05 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setActiveMetric(metric.key as any)}
-            className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
+            className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 whitespace-nowrap font-medium border-2 ${
               activeMetric === metric.key
-                ? "bg-background text-white shadow-lg"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                ? "bg-gradient-to-r from-foreground to-secondary border-foreground text-textcolor shadow-lg"
+                : "bg-background/60 border-foreground/30 text-textcolor/80 hover:border-foreground/50 hover:bg-background/80"
             }`}
           >
-            <span>{metric.icon}</span>
+            <span className="text-lg">{metric.icon}</span>
             <span>{metric.label}</span>
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Chart */}
-      <div className="bg-seondary/20 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+      {/* Chart Container */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="bg-gradient-to-br from-secondary/15 to-foreground/10 rounded-2xl p-6 border-2 border-foreground/30 shadow-lg"
+      >
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={fullWeekData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="day" stroke="#9CA3AF" fontSize={12} />
-              <YAxis
-                stroke="#9CA3AF"
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#F9B487"
+                opacity={0.2}
+              />
+              <XAxis
+                dataKey="day"
+                stroke="#EEEEEE"
                 fontSize={12}
+                tick={{ fill: "#EEEEEE" }}
+              />
+              <YAxis
+                stroke="#EEEEEE"
+                fontSize={12}
+                tick={{ fill: "#EEEEEE" }}
                 tickFormatter={(value) => value.toLocaleString()}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar
                 dataKey={activeMetric}
-                radius={[4, 4, 0, 0]}
+                radius={[8, 8, 0, 0]}
                 fill={getBarColor(0, dailyTarget[activeMetric])}
               >
                 {fullWeekData.map((entry, index) => (
@@ -199,34 +228,70 @@ const WeeklyChart = ({ dailyData, dailyTarget }: WeeklyChartProps) => {
         </div>
 
         {/* Target Line Indicator */}
-        <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-foreground"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="flex items-center justify-center gap-4 mt-6 pt-6 border-t-2 border-foreground/30 flex-wrap"
+        >
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-4 h-4 rounded bg-foreground shadow-lg"
+            />
+            <span className="text-sm text-textcolor/80 font-medium">
               أقل من 80%
             </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-blue-500"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+              className="w-4 h-4 rounded bg-secondary shadow-lg"
+            />
+            <span className="text-sm text-textcolor/80 font-medium">
               80%-100%
             </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-green-500"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+              className="w-4 h-4 rounded bg-foreground shadow-lg"
+            />
+            <span className="text-sm text-textcolor/80 font-medium">
               100%-120%
             </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-red-500"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+              className="w-4 h-4 rounded bg-secondary shadow-lg"
+            />
+            <span className="text-sm text-textcolor/80 font-medium">
               أكثر من 120%
             </span>
-          </div>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

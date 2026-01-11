@@ -1,4 +1,3 @@
-// features/AllFoodLogs/FoodLogItem.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -30,165 +29,325 @@ const FoodLogItem = ({ log, index }: FoodLogItemProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="bg-linear-to-br from-background/20 to-secondary/10  rounded-xl p-5 border border-gray-200 dark:border-gray-700 hover:border-foreground dark:hover:border-foreground transition-all duration-300 group"
+      transition={{ delay: index * 0.05, duration: 0.4 }}
+      whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(249, 180, 135, 0.15)" }}
+      className="bg-linear-to-br from-secondary/15 to-foreground/10 rounded-xl p-5 border-2 border-foreground/25 hover:border-foreground/50 transition-all duration-300 group shadow-lg"
     >
-      {/* Header */}
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <h3 className="font-semibold text-gray-800 dark:text-white text-lg group-hover:text-background dark:group-hover:text-foreground transition-colors">
+      {/* Header Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.05 + 0.1 }}
+        className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5"
+      >
+        {/* Left Side - Title and Meta */}
+        <div className="flex-1 w-full">
+          <motion.h3
+            whileHover={{ scale: 1.02 }}
+            className="font-bold text-textcolor text-lg group-hover:text-foreground transition-colors"
+          >
             {log.raw_input}
-          </h3>
-          <div className="flex items-center gap-4 mt-2 text-sm">
-            {/* <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-              <Calendar className="w-4 h-4" />
-              <span>{formatDate(log.logged_at)}</span>
-            </div> */}
-            <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-              <Clock className="w-4 h-4" />
+          </motion.h3>
+
+          {/* Meta Information */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.05 + 0.15 }}
+            className="flex flex-wrap items-center gap-3 mt-2"
+          >
+            {/* Time */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-1.5 text-textcolor/70 text-sm font-medium"
+            >
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <Clock className="w-4 h-4 text-foreground" />
+              </motion.div>
               <span>{log.logged_at}</span>
-            </div>
+            </motion.div>
+
+            {/* Source Badge */}
             {log.source && (
-              <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full">
-                {log.source === "manual" ? "يدوي" : "تلقائي"}
-              </span>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 + 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                className="px-3 py-1 text-xs font-semibold bg-linear-to-r from-foreground/20 to-secondary/20 text-foreground rounded-full border border-foreground/30 hover:border-foreground/50 transition-colors"
+              >
+                {log.source === "manual" ? "🖊️ يدوي" : "⚙️ تلقائي"}
+              </motion.span>
             )}
-          </div>
+          </motion.div>
         </div>
-        <div className="bg-linear-to-r from-foreground/10 to-foreground/5 p-3 rounded-lg">
-          <div className="flex items-center gap-1">
-            <Flame className="w-5 h-5 text-foreground" />
-            <span className="font-bold text-lg text-background dark:text-white">
-              {Math.round(log.nutrition.calories)}
-            </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              سعرة
-            </span>
-          </div>
-        </div>
-      </div>
 
-      {/* Nutrition Breakdown */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        {/* Protein */}
-        <div className="bg-linear-to-r from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-900/10 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <Beef className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              </div>
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                البروتين
+        {/* Right Side - Calories Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.05 + 0.15 }}
+          whileHover={{ scale: 1.08, rotate: 2 }}
+          className="bg-linear-to-br from-foreground/30 to-secondary/20 p-4 rounded-lg border border-foreground/30 shadow-md"
+        >
+          <div className="flex items-center gap-2">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Flame className="w-5 h-5 text-foreground" />
+            </motion.div>
+            <div className="flex items-baseline gap-1">
+              <span className="font-bold text-xl text-textcolor">
+                {Math.round(log.nutrition.calories)}
+              </span>
+              <span className="text-sm text-textcolor/70 font-medium">
+                سعرة
               </span>
             </div>
-            <span className="font-bold text-gray-800 dark:text-white">
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Nutrition Breakdown Grid */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.05 + 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5"
+      >
+        {/* Protein Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 + 0.25 }}
+          whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(249, 180, 135, 0.2)" }}
+          className="bg-linear-to-br from-foreground/15 to-foreground/5 rounded-lg p-4 border border-foreground/25 shadow-md"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                className="p-2 bg-linear-to-br from-foreground/30 to-foreground/10 rounded-lg"
+              >
+                <Beef className="w-4 h-4 text-foreground" />
+              </motion.div>
+              <span className="font-bold text-textcolor">البروتين</span>
+            </div>
+            <motion.span
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="font-bold text-foreground text-lg"
+            >
               {Math.round(log.nutrition.protein)}g
-            </span>
+            </motion.span>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-            <div
-              className="h-1.5 rounded-full bg-blue-500"
-              style={{
-                width: `${Math.min(
-                  log.nutrition.macros_percentage.protein,
-                  100
-                )}%`,
+
+          {/* Progress Bar */}
+          <div className="w-full bg-background/40 rounded-full h-2 overflow-hidden border border-foreground/20">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{
+                width: `${Math.min(log.nutrition.macros_percentage.protein, 100)}%`,
               }}
-            ></div>
+              transition={{ delay: index * 0.05 + 0.3, duration: 0.8 }}
+              className="h-full rounded-full bg-linear-to-r from-foreground to-secondary shadow-lg"
+            />
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-left">
+
+          {/* Percentage */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.05 + 0.35 }}
+            className="text-xs text-textcolor/60 mt-2 font-semibold text-right"
+          >
             {log.nutrition.macros_percentage.protein.toFixed(1)}%
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Carbs */}
-        <div className="bg-linear-to-r from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-900/10 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
+        {/* Carbs Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 + 0.3 }}
+          whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(217, 233, 207, 0.2)" }}
+          className="bg-linear-to-br from-secondary/15 to-secondary/5 rounded-lg p-4 border border-secondary/25 shadow-md"
+        >
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                <Wheat className="w-4 h-4 text-green-600 dark:text-green-400" />
-              </div>
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                الكربوهيدرات
-              </span>
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                className="p-2 bg-linear-to-br from-secondary/30 to-secondary/10 rounded-lg"
+              >
+                <Wheat className="w-4 h-4 text-secondary" />
+              </motion.div>
+              <span className="font-bold text-textcolor">الكربوهيدرات</span>
             </div>
-            <span className="font-bold text-gray-800 dark:text-white">
+            <motion.span
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="font-bold text-secondary text-lg"
+            >
               {Math.round(log.nutrition.carbs)}g
-            </span>
+            </motion.span>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-            <div
-              className="h-1.5 rounded-full bg-green-500"
-              style={{
-                width: `${Math.min(
-                  log.nutrition.macros_percentage.carbs,
-                  100
-                )}%`,
-              }}
-            ></div>
-          </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-left">
-            {log.nutrition.macros_percentage.carbs.toFixed(1)}%
-          </div>
-        </div>
 
-        {/* Fat */}
-        <div className="bg-linear-to-r from-orange-50 to-orange-100/50 dark:from-orange-900/20 dark:to-orange-900/10 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                <Droplets className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-              </div>
-              <span className="font-medium text-gray-700 dark:text-gray-300">
-                الدهون
-              </span>
-            </div>
-            <span className="font-bold text-gray-800 dark:text-white">
-              {Math.round(log.nutrition.fat)}g
-            </span>
+          {/* Progress Bar */}
+          <div className="w-full bg-background/40 rounded-full h-2 overflow-hidden border border-secondary/20">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{
+                width: `${Math.min(log.nutrition.macros_percentage.carbs, 100)}%`,
+              }}
+              transition={{ delay: index * 0.05 + 0.35, duration: 0.8 }}
+              className="h-full rounded-full bg-linear-to-r from-secondary to-foreground shadow-lg"
+            />
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-            <div
-              className="h-1.5 rounded-full bg-orange-500"
-              style={{
+
+          {/* Percentage */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.05 + 0.4 }}
+            className="text-xs text-textcolor/60 mt-2 font-semibold text-right"
+          >
+            {log.nutrition.macros_percentage.carbs.toFixed(1)}%
+          </motion.div>
+        </motion.div>
+
+        {/* Fat Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 + 0.35 }}
+          whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(249, 180, 135, 0.15)" }}
+          className="bg-linear-to-br from-foreground/10 to-foreground/5 rounded-lg p-4 border border-foreground/20 shadow-md"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 10 }}
+                className="p-2 bg-linear-to-br from-foreground/20 to-foreground/5 rounded-lg"
+              >
+                <Droplets className="w-4 h-4 text-foreground" />
+              </motion.div>
+              <span className="font-bold text-textcolor">الدهون</span>
+            </div>
+            <motion.span
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="font-bold text-foreground text-lg"
+            >
+              {Math.round(log.nutrition.fat)}g
+            </motion.span>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-background/40 rounded-full h-2 overflow-hidden border border-foreground/20">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{
                 width: `${Math.min(log.nutrition.macros_percentage.fat, 100)}%`,
               }}
-            ></div>
+              transition={{ delay: index * 0.05 + 0.4, duration: 0.8 }}
+              className="h-full rounded-full bg-linear-to-r from-foreground to-secondary shadow-lg"
+            />
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-left">
-            {log.nutrition.macros_percentage.fat.toFixed(1)}%
-          </div>
-        </div>
-      </div>
 
-      {/* Macros Summary */}
-      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-        <div className="flex items-center justify-between text-sm">
-          <div className="text-gray-600 dark:text-gray-400">
+          {/* Percentage */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.05 + 0.45 }}
+            className="text-xs text-textcolor/60 mt-2 font-semibold text-right"
+          >
+            {log.nutrition.macros_percentage.fat.toFixed(1)}%
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Macros Summary Footer */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: index * 0.05 + 0.4 }}
+        className="mt-5 pt-4 border-t border-foreground/20"
+      >
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <motion.div
+            animate={{ scale: [1, 1.02, 1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="text-sm font-bold text-textcolor/80"
+          >
             توزيع الماكروز:
-          </div>
-          <div className="flex gap-4">
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="text-gray-700 dark:text-gray-300">
-                بروتين {log.nutrition.macros_percentage.protein.toFixed(0)}%
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.05 + 0.45 }}
+            className="flex flex-wrap gap-4"
+          >
+            {/* Protein Summary */}
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-foreground/10 border border-foreground/20"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-2.5 h-2.5 rounded-full bg-foreground"
+              />
+              <span className="text-xs font-semibold text-textcolor">
+                بروتين{" "}
+                <span className="text-foreground">
+                  {log.nutrition.macros_percentage.protein.toFixed(0)}%
+                </span>
               </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-green-500"></div>
-              <span className="text-gray-700 dark:text-gray-300">
-                كارب {log.nutrition.macros_percentage.carbs.toFixed(0)}%
+            </motion.div>
+
+            {/* Carbs Summary */}
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/10 border border-secondary/20"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.1 }}
+                className="w-2.5 h-2.5 rounded-full bg-secondary"
+              />
+              <span className="text-xs font-semibold text-textcolor">
+                كارب{" "}
+                <span className="text-secondary">
+                  {log.nutrition.macros_percentage.carbs.toFixed(0)}%
+                </span>
               </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-              <span className="text-gray-700 dark:text-gray-300">
-                دهون {log.nutrition.macros_percentage.fat.toFixed(0)}%
+            </motion.div>
+
+            {/* Fat Summary */}
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-foreground/10 border border-foreground/20"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                className="w-2.5 h-2.5 rounded-full bg-foreground"
+              />
+              <span className="text-xs font-semibold text-textcolor">
+                دهون{" "}
+                <span className="text-foreground">
+                  {log.nutrition.macros_percentage.fat.toFixed(0)}%
+                </span>
               </span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
