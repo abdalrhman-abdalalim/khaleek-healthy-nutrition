@@ -1,18 +1,115 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import {  LayoutDashboard } from "lucide-react";
 
 const LoginButton = () => {
-  return (
-    <div className="flex items-center gap-4">
-      <Button
-        className="bg-background text-secondary hover:bg-background/90"
-        asChild
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const cookies = document.cookie.split(";");
+        const tokenCookie = cookies.find((cookie) =>
+          cookie.trim().startsWith("token=")
+        );
+
+        if (tokenCookie) {
+          const token = tokenCookie.split("=")[1];
+          if (token && token.trim()) {
+            setIsAuthenticated(true);
+          } else {
+            setIsAuthenticated(false);
+          }
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+
+
+  const handleDashboard = () => {
+    router.push("/dashboard");
+  };
+
+  if (isLoading) {
+    return (
+      <motion.div
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="flex items-center gap-4"
       >
-        <Link href="/Register" className="text-background">
-          ابدأ مجاناً
-        </Link>
-      </Button>
-    </div>
+        <div className="w-24 h-10 bg-linear-to-r from-foreground/20 to-secondary/20 rounded-lg border border-foreground/30" />
+      </motion.div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-3"
+      >
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button
+            onClick={handleDashboard}
+            className="bg-linear-to-r from-foreground to-secondary text-background hover:shadow-lg transition-shadow font-bold flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <LayoutDashboard className="w-5 h-5" />
+            </motion.div>
+            لوحة التحكم
+          </Button>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4 }}
+      className="flex items-center gap-4"
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Button
+          className="bg-linear-to-r from-background to-background/80 text-secondary hover:shadow-lg transition-shadow font-bold border-2 border-secondary/30"
+          asChild
+        >
+          <Link href="/Register" className="text-secondary flex items-center gap-2">
+            ابدأ مجاناً
+          </Link>
+        </Button>
+      </motion.div>
+    </motion.div>
   );
 };
+
 export default LoginButton;
