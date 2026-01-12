@@ -28,7 +28,7 @@ const SidebarContentNav = ({ isExpanded }: IProps) => {
               "w-full justify-start h-12 px-3 transition-all duration-300 relative group cursor-pointer ",
               "hover:bg-secondary/10 hover:text-primary",
               isActive && "bg-secondary/10 text-primary shadow-sm",
-              isExpanded ? "gap-3 pr-4" : "justify-center"
+              isExpanded ? "gap-3 " : ""
             )}
             onClick={() => router.push(item.href)}
           >

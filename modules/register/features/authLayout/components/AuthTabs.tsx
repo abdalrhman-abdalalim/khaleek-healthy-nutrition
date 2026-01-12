@@ -7,7 +7,7 @@ interface AuthTabsProps {
 
 const AuthTabs = ({ activeTab, onChange }: AuthTabsProps) => {
   const tabClass = (active: boolean) =>
-    `w-1/2 rounded-xl px-8 py-2.5 text-base font-bold transition-all ${
+    `w-1/2 rounded-xl px-3 py-2.5 text-base font-bold transition-all ${
       active ? "bg-foreground text-white shadow-lg" : "hover:bg-gray-200/50"
     }`;
 
