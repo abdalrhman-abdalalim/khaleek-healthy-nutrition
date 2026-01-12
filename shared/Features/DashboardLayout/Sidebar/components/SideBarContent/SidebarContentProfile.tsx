@@ -33,7 +33,7 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
       <div
         className={cn(
           "flex items-center gap-3 mb-4 p-2 rounded-lg hover:bg-accent transition-all duration-200 group hover:bg-foreground/10",
-          !isExpanded && "justify-center"
+          !isExpanded && ""
         )}
       >
         <Link
@@ -68,7 +68,7 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
         variant="ghost"
         className={cn(
           "w-full justify-start h-12 px-3 text-red-500 hover:bg-red-500/10 hover:text-red-600",
-          isExpanded ? "gap-3" : "justify-center"
+          isExpanded ? "gap-3" : ""
         )}
         onClick={handleLogout}
       >
