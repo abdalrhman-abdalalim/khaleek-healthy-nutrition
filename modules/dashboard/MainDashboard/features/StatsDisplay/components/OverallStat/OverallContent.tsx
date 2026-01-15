@@ -1,3 +1,5 @@
+"use client";
+
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Calendar, Target } from "lucide-react";

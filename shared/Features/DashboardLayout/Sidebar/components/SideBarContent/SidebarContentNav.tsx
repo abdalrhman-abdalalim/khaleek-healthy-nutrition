@@ -1,3 +1,5 @@
+"use client";
+
 import { buttonVariants } from "@/components/ui/button";
 import { navItems } from "../../data";
 import { cn } from "@/shared/Lib/utils";
