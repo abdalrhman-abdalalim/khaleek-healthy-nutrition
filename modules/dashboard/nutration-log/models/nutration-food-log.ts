@@ -26,7 +26,7 @@ export interface CreateFoodLogOptions {
 
 export function useFoodLogsData() {
   const createMutation = useCreateFoodLogFromText();
-  // const parseMutation = useParseFoodText();
+  const parseMutation = useParseFoodText();
 
   const createFoodLog = async (
     data: FoodLogTextRequest,
@@ -76,15 +76,15 @@ export function useFoodLogsData() {
 
     // Loading states
     isCreating: createMutation.isPending,
-    // isParsing: parseMutation.isPending,
+    isParsing: parseMutation.isPending,
 
     // Errors
     createError: createMutation.error,
-    // parseError: parseMutation.error,
+    parseError: parseMutation.error,
 
     // Reset functions
     resetCreate: createMutation.reset,
-    // resetParse: parseMutation.reset,
+    resetParse: parseMutation.reset,
   };
 }
 
