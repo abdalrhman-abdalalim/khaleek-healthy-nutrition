@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid lg:grid-cols-2 gap-12 mb-12">
           <BrandSection />
           <div className="space-y-8">
-            <SocialLinks />
+            {/* <SocialLinks /> */}
             <LoginButtonSection />
           </div>
         </div>
