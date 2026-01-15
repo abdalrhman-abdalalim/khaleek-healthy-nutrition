@@ -34,20 +34,20 @@ export default function FoodLogTextInput() {
     setIsSubmitting(true);
 
     try {
-      const parseResult = await parseFoodText(text);
+      // const parseResult = await parseFoodText(text);
 
-      if (parseResult.success && parseResult.data?.length) {
-        toast.success(
-          `تم التعرف على ${parseResult.data.length} عنصر غذائي بنجاح! ✨`,
-          {
-            icon: "👨‍🍳",
-            style: {
-              background: "linear-gradient(135deg, #F9B487 0%, #D9E9CF 100%)",
-              color: "#174143",
-            },
-          }
-        );
-      }
+      // if (parseResult.success && parseResult.data?.length) {
+      //   toast.success(
+      //     `تم التعرف على ${parseResult.data.length} عنصر غذائي بنجاح! ✨`,
+      //     {
+      //       icon: "👨‍🍳",
+      //       style: {
+      //         background: "linear-gradient(135deg, #F9B487 0%, #D9E9CF 100%)",
+      //         color: "#174143",
+      //       },
+      //     }
+      //   );
+      // }
 
       const result = await createFoodLog({ meal_type: mealType, text });
 
