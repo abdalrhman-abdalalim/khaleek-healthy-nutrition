@@ -1,8 +1,11 @@
+"use client";
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Activity, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
+import { useMemo } from "react";
 
 interface IProps {
   ai: {
@@ -13,15 +16,24 @@ interface IProps {
 }
 
 const AiStatContent = ({ ai }: IProps) => {
-  const aiEngagement =
-    ai.total_recommendations > 0
-      ? Math.min(ai.total_recommendations * 20, 100)
-      : 0;
+  // Normalize null values to 0 for consistent comparison between server and client
+  // This ensures the same logic runs on both server and client
+  const avgAdherenceScore = ai.avg_adherence_score ?? 0;
+  const helpfulCount = ai.helpful_count ?? 0;
+
+  // Calculate aiEngagement with consistent, deterministic logic
+  // Using useMemo ensures the calculation is stable
+  const aiEngagement = useMemo(() => {
+    if (ai.total_recommendations > 0) {
+      return Number(Math.min(ai.total_recommendations * 20, 100).toFixed(2));
+    }
+    return 10;
+  }, [ai.total_recommendations]);
 
   const hasNoAiData =
     ai.total_recommendations === 0 ||
-    !ai.avg_adherence_score ||
-    !ai.helpful_count ||
+    avgAdherenceScore === 0 ||
+    helpfulCount === 0 ||
     aiEngagement === 0;
 
   if (hasNoAiData) {
@@ -32,12 +44,15 @@ const AiStatContent = ({ ai }: IProps) => {
             الرجاء تسجيل وجباتك أولاً
           </p>
 
-          <Button
-            asChild
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          <Link
+            href="/dashboard/profile/edit"
+            className={cn(
+              buttonVariants(),
+              "inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+            )}
           >
-            <Link href="/dashboard/profile/edit">تسجيل وجباتك</Link>
-          </Button>
+            تسجيل وجباتك
+          </Link>
         </div>
       </CardContent>
     );
@@ -48,7 +63,7 @@ const AiStatContent = ({ ai }: IProps) => {
       <div className="space-y-4">
         <div className="text-center mb-3">
           <div className="text-3xl font-bold text-secondary mb-1">
-            {ai.avg_adherence_score}%
+            {avgAdherenceScore}%
           </div>
           <div className="text-sm text-secondary/60">معدل الإلتزام</div>
         </div>
@@ -61,9 +76,7 @@ const AiStatContent = ({ ai }: IProps) => {
                 التوصيات المفيدة
               </span>
             </div>
-            <span className="font-medium text-secondary">
-              {ai.helpful_count}
-            </span>
+            <span className="font-medium text-secondary">{helpfulCount}</span>
           </div>
 
           <div className="flex items-center justify-between">

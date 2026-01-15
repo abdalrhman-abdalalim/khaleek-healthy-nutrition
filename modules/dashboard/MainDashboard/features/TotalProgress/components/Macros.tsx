@@ -1,6 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 import { Beef, Droplet, Wheat } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
 
 interface IProps {
@@ -40,12 +41,15 @@ const Macros = ({ food, targets }: IProps) => {
           الرجاء تحديد أهدافك وتسجيل وجباتك أولاً
         </p>
 
-        <Button
-          asChild
-          className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+        <Link
+          href="/dashboard/profile/edit"
+          className={cn(
+            buttonVariants(),
+            "inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          )}
         >
-          <Link href="/dashboard/profile/edit">إعداد الأهداف الغذائية</Link>
-        </Button>
+          إعداد الأهداف الغذائية
+        </Link>
       </div>
     );
   }

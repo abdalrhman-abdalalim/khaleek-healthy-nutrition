@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/shared/Lib/utils";
 import { LogOut, User } from "lucide-react";
 import Link from "next/link";
@@ -64,9 +64,9 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
         </Link>
       </div>
 
-      <Button
-        variant="ghost"
+      <button
         className={cn(
+          buttonVariants({ variant: "ghost" }),
           "w-full justify-start h-12 px-3 text-red-500 hover:bg-red-500/10 hover:text-red-600",
           isExpanded ? "gap-3" : ""
         )}
@@ -80,7 +80,7 @@ const SidebarContentProfile = ({ isExpanded }: IProps) => {
         >
           Logout
         </span>
-      </Button>
+      </button>
     </div>
   );
 };

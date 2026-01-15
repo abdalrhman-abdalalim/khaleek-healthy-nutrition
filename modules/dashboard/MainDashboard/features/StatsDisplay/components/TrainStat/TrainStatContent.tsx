@@ -2,7 +2,8 @@ import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Activity, Clock } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 
 interface IProps {
   training: {
@@ -33,14 +34,15 @@ const TrainStatContent = ({ training }: IProps) => {
             الرجاء تسجيل وجباتك أولاً
           </p>
 
-          <Button
-            asChild
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          <Link
+            href="/dashboard/profile/edit"
+            className={cn(
+              buttonVariants(),
+              "inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+            )}
           >
-            <Link href="/dashboard/profile/edit">
-              تسجيل وجباتك
-            </Link>
-          </Button>
+            تسجيل وجباتك
+          </Link>
         </div>
       </CardContent>
     );

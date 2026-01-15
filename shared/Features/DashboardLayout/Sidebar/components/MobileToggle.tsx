@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import { Menu, X } from "lucide-react";
 
 interface IProps {
@@ -7,14 +8,15 @@ interface IProps {
 }
 const MobileToggle = ({ setIsMobileOpen, isMobileOpen }: IProps) => {
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="fixed top-4 left-4 z-50 md:hidden bg-foreground/80 backdrop-blur-sm "
+    <button
+      className={cn(
+        buttonVariants({ variant: "ghost", size: "icon" }),
+        "fixed top-4 left-4 z-50 md:hidden bg-foreground/80 backdrop-blur-sm "
+      )}
       onClick={() => setIsMobileOpen(!isMobileOpen)}
     >
       {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
-    </Button>
+    </button>
   );
 };
 export default MobileToggle;

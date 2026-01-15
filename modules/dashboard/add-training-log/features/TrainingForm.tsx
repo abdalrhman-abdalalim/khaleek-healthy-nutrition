@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageSquare } from "lucide-react";
@@ -163,13 +164,16 @@ const TrainingForm: React.FC<TrainingFormProps> = ({
             /> 
         </div>
 
-        <Button
+        <button
           onClick={onSubmit}
           disabled={isPending}
-          className="w-full h-14 text-xl font-bold bg-foreground text-background rounded-2xl"
+          className={cn(
+            buttonVariants(),
+            "w-full h-14 text-xl font-bold bg-foreground text-background rounded-2xl"
+          )}
         >
           {isPending ? "جاري الحفظ..." : "حفظ التمرين"}
-        </Button>
+        </button>
       </div>
     </div>
   );

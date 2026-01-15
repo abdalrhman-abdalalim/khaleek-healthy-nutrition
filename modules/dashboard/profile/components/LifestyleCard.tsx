@@ -1,7 +1,8 @@
 import { UserProfile } from "../models/type";
 import { Activity, Utensils, Wallet, Target } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 
 interface ItemProps {
   label: string;
@@ -21,9 +22,15 @@ const Lifestyle = ({ profile }: { profile: UserProfile }) => {
         <p className="text-lg font-semibold text-secondary">
           الرجاء إكمال بياناتك أولاً
         </p>
-        <Button asChild className="px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all">
-          <Link href="/dashboard/profile/edit">إكمال البيانات</Link>
-        </Button>
+        <Link
+          href="/dashboard/profile/edit"
+          className={cn(
+            buttonVariants(),
+            "px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all"
+          )}
+        >
+          إكمال البيانات
+        </Link>
       </div>
     );
   }

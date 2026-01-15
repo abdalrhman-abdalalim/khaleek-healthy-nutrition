@@ -3,7 +3,8 @@ import { DailyTargets } from "../models/type";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Flame, Beef, Wheat, Droplet, Apple } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 
 interface DailyTargetsCardProps {
   targets: DailyTargets;
@@ -20,9 +21,15 @@ const DailyTargetsCard = ({ targets }: DailyTargetsCardProps) => {
         <p className="text-lg font-semibold text-secondary">
           الرجاء إكمال بياناتك أولاً
         </p>
-        <Button asChild className="px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all">
-          <Link href="/dashboard/profile/edit">إكمال البيانات</Link>
-        </Button>
+        <Link
+          href="/dashboard/profile/edit"
+          className={cn(
+            buttonVariants(),
+            "px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all"
+          )}
+        >
+          إكمال البيانات
+        </Link>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import {
   Select,
   SelectTrigger,
@@ -115,28 +116,29 @@ export default function TrainingLogsFilter({
           "
         />
 
-        <Button
+        <button
           onClick={() => {
             setSearchText("");
             setSelectedType("all");
             setSelectedDate("");
           }}
-          className="
-            h-12
-            w-full
-            rounded-xl
-            border-2 border-foreground
-            text-foreground
-            font-bold
-            bg-transparent
-            hover:bg-foreground
-            hover:text-background
-            transition-all
-            active:scale-95
-          "
+          className={cn(
+            buttonVariants(),
+            "h-12",
+            "w-full",
+            "rounded-xl",
+            "border-2 border-foreground",
+            "text-foreground",
+            "font-bold",
+            "bg-transparent",
+            "hover:bg-foreground",
+            "hover:text-background",
+            "transition-all",
+            "active:scale-95"
+          )}
         >
           مسح الفلاتر
-        </Button>
+        </button>
       </div>
     </div>
   );

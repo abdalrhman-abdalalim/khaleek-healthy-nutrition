@@ -2,7 +2,8 @@
 
 import { Dumbbell } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 
 export default function TrainingHeader() {
   const router = useRouter();
@@ -25,12 +26,15 @@ export default function TrainingHeader() {
         تتبع تقدمك وإنجازاتك الرياضية
       </p>
 
-      <Button
-        className="h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+      <button
+        className={cn(
+          buttonVariants(),
+          "h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+        )}
         onClick={handleAddTraining}
       >
         إضافة تمرين جديد
-      </Button>
+      </button>
     </div>
   );
 }

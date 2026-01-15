@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import { CardContent } from "@/components/ui/card";
 import { Clock, Target, User } from "lucide-react";
 import Link from "next/link";
@@ -28,11 +29,15 @@ const Cardcontent = ({ food }: IProps) => {
           <p className="text-sm font-semibold text-secondary">
             الرجاء تسجيل وجباتك أولاً
           </p>
-          <Button asChild className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300">
-            <Link href="/dashboard/profile/edit">
-                 سجيل وجباتك            
-              </Link>
-          </Button>
+          <Link
+            href="/dashboard/profile/edit"
+            className={cn(
+              buttonVariants(),
+              "inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+            )}
+          >
+            سجيل وجباتك
+          </Link>
         </div>
         ) : (
           <>
