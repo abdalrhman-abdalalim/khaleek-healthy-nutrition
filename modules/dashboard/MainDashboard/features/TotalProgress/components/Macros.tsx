@@ -1,3 +1,5 @@
+"use client";
+
 import { Progress } from "@/components/ui/progress";
 import { Beef, Droplet, Wheat } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";

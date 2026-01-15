@@ -1,3 +1,5 @@
+"use client";
+
 import { Dumbbell } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/shared/Lib/utils";

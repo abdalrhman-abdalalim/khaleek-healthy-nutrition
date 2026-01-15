@@ -1,3 +1,5 @@
+"use client";
+
 import { Progress } from "@/components/ui/progress";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/shared/Lib/utils";

@@ -1,3 +1,5 @@
+"use client";
+
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/shared/Lib/utils";
 import { Menu, X } from "lucide-react";

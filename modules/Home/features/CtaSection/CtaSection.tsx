@@ -1,3 +1,5 @@
+"use client";
+
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/shared/Lib/utils";
 import { ArrowRight, Zap } from "lucide-react";

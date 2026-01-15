@@ -1,3 +1,5 @@
+"use client";
+
 import { UserProfile } from "../models/type";
 import { Activity, Utensils, Wallet, Target } from "lucide-react";
 import Link from "next/link";
