@@ -59,6 +59,8 @@ const WeeklyStats = ({
     return (consumedNum / target) * 100;
   };
 
+  
+
   const caloriesPercentage = calculatePercentage(
     summary.totals.total_calories,
     targets.weekly.calories
@@ -129,7 +131,7 @@ const WeeklyStats = ({
               transition={{ duration: 2, repeat: Infinity }}
               className={`text-3xl font-bold ${getAdherenceColor(adherence)}`}
             >
-              {adherence}%
+              {Math.round(adherence)}%
             </motion.span>
             <p className="text-textcolor/70 text-sm mt-1 font-medium">
               معدل الالتزام
