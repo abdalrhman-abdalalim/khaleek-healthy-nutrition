@@ -103,6 +103,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
       </head>
       <body className="font-sans antialiased">
         <Providers>
