@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -71,9 +72,12 @@ const LoginButton = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Button
+          <button
             onClick={handleDashboard}
-            className="bg-linear-to-r from-foreground to-secondary text-background hover:shadow-lg transition-shadow font-bold flex items-center gap-2"
+            className={cn(
+              buttonVariants(),
+              "bg-linear-to-r from-foreground to-secondary text-background hover:shadow-lg transition-shadow font-bold flex items-center gap-2"
+            )}
           >
             <motion.div
               animate={{ x: [0, 4, 0] }}
@@ -82,7 +86,7 @@ const LoginButton = () => {
               <LayoutDashboard className="w-5 h-5" />
             </motion.div>
             لوحة التحكم
-          </Button>
+          </button>
         </motion.div>
       </motion.div>
     );
@@ -99,14 +103,15 @@ const LoginButton = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Button
-          className="bg-linear-to-r from-background to-background/80 text-secondary hover:shadow-lg transition-shadow font-bold border-2 border-secondary/30"
-          asChild
+        <Link
+          href="/Register"
+          className={cn(
+            buttonVariants(),
+            "bg-linear-to-r from-background to-background/80 text-secondary hover:shadow-lg transition-shadow font-bold border-2 border-secondary/30 flex items-center gap-2"
+          )}
         >
-          <Link href="/Register" className="text-secondary flex items-center gap-2">
-            ابدأ مجاناً
-          </Link>
-        </Button>
+          ابدأ مجاناً
+        </Link>
       </motion.div>
     </motion.div>
   );

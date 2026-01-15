@@ -2,7 +2,6 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@/shared/Lib/utils";
 
 const buttonVariants = cva(
@@ -37,7 +36,8 @@ const buttonVariants = cva(
   }
 );
 
-function Button({
+// Create a wrapper component that handles hydration
+function ClientOnlyButton({
   className,
   variant = "default",
   size = "default",
@@ -47,7 +47,27 @@ function Button({
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
   }) {
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const Comp = asChild ? Slot : "button";
+
+  if (!isClient) {
+    // Return a placeholder with the same dimensions during SSR
+    return (
+      <button
+        data-slot="button-placeholder"
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          "opacity-0"
+        )}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <Comp
@@ -60,4 +80,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { ClientOnlyButton as Button, buttonVariants };

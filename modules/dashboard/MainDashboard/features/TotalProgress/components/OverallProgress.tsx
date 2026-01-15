@@ -1,5 +1,6 @@
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
 interface IProps {
   progress_percentage: number | undefined;
@@ -28,13 +29,15 @@ const OverallProgress = ({ progress_percentage }: IProps) => {
       </p>
 
       <div className="pt-2 flex justify-center">
-        <Button
-          asChild
-          size="sm"
-          className="h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+        <Link
+          href="/dashboard/profile/edit"
+          className={cn(
+            buttonVariants({ size: "sm" }),
+            "h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+          )}
         >
-          <Link href="/dashboard/profile/edit">اكمال بياناتك</Link>
-        </Button>
+          اكمال بياناتك
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 import { cn } from "@/shared/Lib/utils";
 import { Brain } from "lucide-react";
 import Link from "next/link";
+import Logo from "@/public/Screenshot_2026-01-15_at_11.25.47_PM-removebg-preview.png";
+import Image from "next/image";
+import roundedImage from "@/public/Gemini_Generated_Image_stfpzfstfpzfstfp_-_Edited-removebg-preview.png";
 
 interface IProps {
   isExpanded: boolean;
@@ -13,23 +16,27 @@ const SidebarContentHeader = ({ isExpanded }: IProps) => {
       <Link href={"/"}>
         <div
           className={cn(
-            "flex items-center gap-3 transition-all duration-300",
+            "flex items-center  transition-all duration-300",
             !isExpanded && "justify-center"
           )}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-foreground to-background shadow-lg">
-            <Brain className="h-6 w-6 text-textcolor" />
-          </div>
-          <h1 className="text-lg md:hidden block font-semibold whitespace-nowrap">
-            <span className="text-xl font-bold text-textcolor">خليك هيلثي</span>
-          </h1>
-          {isExpanded && (
-            <h1 className="text-lg font-semibold whitespace-nowrap">
-              <span className="text-xl font-bold text-textcolor">
-                خليك هيلثي
-              </span>
-            </h1>
-          )}
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={340}
+            height={10}
+            className="h-20 w-40 object-cover  flex-1"
+          />
+
+          {/* {isExpanded && (
+            <Image
+              src={Logo}
+              alt="Logo"
+              width={240}
+              height={10}
+              className="h-20 w-40 object-cover bflex-1"
+            />
+          )} */}
         </div>
       </Link>
     </div>

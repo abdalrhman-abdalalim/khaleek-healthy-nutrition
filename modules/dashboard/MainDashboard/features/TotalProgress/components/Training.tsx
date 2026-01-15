@@ -1,5 +1,6 @@
 import { Dumbbell } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
 
 interface IProps {
@@ -26,12 +27,15 @@ const Training = ({ training, net_calories }: IProps) => {
             لم يتم تسجيل أي تمارين بعد
           </p>
 
-          <Button
-            asChild
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+          <Link
+            href="/dashboard/training/add_train"
+            className={cn(
+              buttonVariants(),
+              "inline-flex items-center gap-2 px-6 py-2 rounded-xl bg-secondary text-background font-semibold shadow-lg hover:scale-105 transition-all duration-300"
+            )}
           >
-            <Link href="/dashboard/training/add_train">إضافة التمارين</Link>
-          </Button>
+            إضافة التمارين
+          </Link>
         </div>
       </div>
     );

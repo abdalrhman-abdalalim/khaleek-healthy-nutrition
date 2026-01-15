@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import { Loader2, Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 interface SaveChangesButtonProps {
@@ -28,13 +29,16 @@ const SaveChangesButton: React.FC<SaveChangesButtonProps> = ({
 
   return (
     <div className="flex justify-end gap-4">
-      <Button
+      <button
         onClick={handleClick}
         disabled={isPending}
-        className="bg-linear-to-r from-foreground to-foreground/80 text-background
-                   hover:from-foreground/90 hover:to-foreground/70
-                   h-14 px-8 text-lg font-bold rounded-2xl shadow-lg
-                   hover:shadow-xl transition-all disabled:opacity-50"
+        className={cn(
+          buttonVariants(),
+          "bg-linear-to-r from-foreground to-foreground/80 text-background",
+          "hover:from-foreground/90 hover:to-foreground/70",
+          "h-14 px-8 text-lg font-bold rounded-2xl shadow-lg",
+          "hover:shadow-xl transition-all disabled:opacity-50"
+        )}
       >
         {isPending ? (
           <>
@@ -47,7 +51,7 @@ const SaveChangesButton: React.FC<SaveChangesButtonProps> = ({
             حفظ التغييرات
           </>
         )}
-      </Button>
+      </button>
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import { User } from "lucide-react";
 
 const LoginButtonSection = () => {
@@ -13,13 +14,16 @@ const LoginButtonSection = () => {
             انضم إلى آلاف المستخدمين الذين يحققون أهدافهم
           </p>
         </div>
-        <Button
-          className="bg-linear-to-r from-foreground to-foreground/90 text-secondary hover:from-foreground hover:to-foreground shadow-lg shadow-foreground/20 hover:shadow-foreground/30 px-8 py-6 rounded-xl hover:scale-105 transition-all duration-300 min-w-45"
+        <button
+          className={cn(
+            buttonVariants(),
+            "bg-linear-to-r from-foreground to-foreground/90 text-secondary hover:from-foreground hover:to-foreground shadow-lg shadow-foreground/20 hover:shadow-foreground/30 px-8 py-6 rounded-xl hover:scale-105 transition-all duration-300 min-w-45"
+          )}
           onClick={() => (window.location.href = "/Register")}
         >
           <User className="ml-2 h-5 w-5 text-background" />
           <span className="font-semibold text-background">تسجيل الدخول</span>
-        </Button>
+        </button>
       </div>
     </div>
   );

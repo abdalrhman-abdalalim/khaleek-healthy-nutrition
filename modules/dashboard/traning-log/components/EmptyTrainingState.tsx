@@ -1,7 +1,8 @@
 "use client";
 
 import { Dumbbell } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/shared/Lib/utils";
 import Link from "next/link";
 
 interface EmptyTrainingStateProps {
@@ -33,10 +34,14 @@ export default function EmptyTrainingState({
       </p>
 
       {actionHref && (
-        <Link href={actionHref}>
-          <Button className="h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all">
-            {actionLabel}
-          </Button>
+        <Link
+          href={actionHref}
+          className={cn(
+            buttonVariants(),
+            "h-14 px-10 text-lg font-bold rounded-2xl bg-foreground text-background hover:bg-foreground/90 shadow-xl hover:shadow-2xl transition-all"
+          )}
+        >
+          {actionLabel}
         </Link>
       )}
     </div>

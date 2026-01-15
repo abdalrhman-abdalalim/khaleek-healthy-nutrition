@@ -17,11 +17,11 @@ const ScreenHeader = () => {
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute -inset-4 bg-gradient-to-r from-foreground/20 via-secondary/20 to-foreground/20 rounded-2xl blur-xl"
+          className="absolute -inset-4 bg-linear-to-r from-foreground/20 via-secondary/20 to-foreground/20 rounded-2xl blur-xl"
         />
 
         <motion.h1
-          className="relative text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-secondary to-foreground bg-clip-text text-transparent"
+          className="relative text-4xl md:text-5xl font-bold bg-linear-to-r from-foreground via-secondary to-foreground bg-clip-text text-transparent"
           animate={{ scale: [1, 1.03, 1] }}
           transition={{ duration: 3, repeat: Infinity }}
         >
@@ -29,17 +29,17 @@ const ScreenHeader = () => {
         </motion.h1>
 
         <motion.div
-          className="absolute -bottom-3 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-foreground to-transparent opacity-80 rounded-full"
+          className="absolute -bottom-3 left-0 right-0 h-1.5 bg-linear-to-r from-transparent via-foreground to-transparent opacity-80 rounded-full"
           animate={{ scaleX: [0.7, 1, 0.7], opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-1/2 -right-8 w-6 h-1 bg-gradient-to-l from-secondary to-transparent"
+          className="absolute top-1/2 -right-8 w-6 h-1 bg-linear-to-l from-secondary to-transparent"
           animate={{ x: [0, 4, 0], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-1/2 -left-8 w-6 h-1 bg-gradient-to-r from-foreground to-transparent"
+          className="absolute top-1/2 -left-8 w-6 h-1 bg-linear-to-r from-foreground to-transparent"
           animate={{ x: [0, -4, 0], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
@@ -72,7 +72,7 @@ const ScreenHeader = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 + index * 0.1 }}
             whileHover={{ scale: 1.1, y: -2 }}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-foreground/15 to-secondary/15 border border-foreground/30 hover:border-foreground/50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-foreground/15 to-secondary/15 border border-foreground/30 hover:border-foreground/50 transition-colors"
           >
             <span className="text-xl">{item.icon}</span>
             <span className="text-sm font-medium text-textcolor/80">
@@ -87,7 +87,7 @@ const ScreenHeader = () => {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
-        className="mt-8 h-1 bg-gradient-to-r from-transparent via-foreground/40 to-transparent rounded-full"
+        className="mt-8 h-1 bg-linear-to-r from-transparent via-foreground/40 to-transparent rounded-full"
       />
     </motion.div>
   );

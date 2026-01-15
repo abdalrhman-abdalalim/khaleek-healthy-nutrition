@@ -1,13 +1,17 @@
-// components/dashboard/UserGreeting.tsx
 "use client";
 
 import { Sparkles } from "lucide-react";
+import { useEffect, useState } from "react"; // Import useEffect and useState
 
 export default function UserGreeting() {
-  const userName =
-    typeof window !== "undefined"
-      ? localStorage.getItem("user_name")
-      : "المستخدم";
+  const [userName, setUserName] = useState("المستخدم"); // Default value
+
+  useEffect(() => {
+    // This only runs on the client
+    const name = localStorage.getItem("user_name") || "المستخدم";
+    setUserName(name);
+  }, []);
+
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-linear-to-r from-foreground/40 to-foreground/90 shadow-sm my-3 mx-5">
       <div className="flex items-center gap-3">
